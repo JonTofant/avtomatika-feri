@@ -9,6 +9,7 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 - `css/styles.css` – tema, postavitev in odzivni slogi, razdeljeni po sklopih.
 - `js/main.js` – interaktivna zanka ter predmetnika UN in VS.
 - `js/hero.js` – premikanje drona in satelita glede na položaj strani.
+- `js/robotics.js` – vožnja dvokolesnega robota ter hoja dvonožca in štirinožca.
 - `assets/images/` – fotografije projektov.
 - `tests/hero.test.cjs` – preverjanje pomikanja in geometrije sledenja.
 
@@ -49,6 +50,19 @@ v SVG-ju, brez slik ali animacijskih knjižnic.
 Animacija se posodobi ob pomiku ali spremembi velikosti okna, največ enkrat na
 izrisni okvir. Časovnikov, neprekinjene animacijske zanke in prestrezanja pomikanja ni.
 
+### Robotika in berljivost
+
+Pod prvim uvodom je temen razdelek `#robotika` s tremi SVG-roboti. Pomik strani
+neposredno določa njihov položaj, vrtenje koles in korake. Noge uporabljajo
+geometrijo dveh členov; med fazo opore stopalo ostane na tleh. Namizni prizor
+se pripne, roboti prečkajo zaslon in se zunaj vidnega dela vrnejo na začetek.
+Na telefonu ostanejo vsi trije vidni, pot pa je krajša. Pomik navzgor obrne
+gibanje. Zmanjšano gibanje in izklopljen JavaScript ohranita mirujoč prikaz.
+Gre za shematsko ilustracijo principov, ne za simulacijo konkretnih robotov.
+
+Opisi imajo krajše odstavke in poudarjene ključne misli. Predmetnik je privzeto
+zložen; odpre se s klikom na naslov ali z izbiro študijskega programa.
+
 ## Preverjanje
 
 Z nameščenim Node.js:
@@ -56,7 +70,8 @@ Z nameščenim Node.js:
 ```sh
 node --check js/main.js
 node --check js/hero.js
-node --test tests/hero.test.cjs
+node --check js/robotics.js
+node --test tests/*.test.cjs
 ```
 
 Testi preverjajo obratno pomikanje, sledenje radarja, lego odtisa SAR na Zemlji,

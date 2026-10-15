@@ -3,32 +3,32 @@
 var state={node:'vodenje',tab:'un'};
 var data = [
       { id: 'senzorji', num: '01', label: 'Senzorji', title: 'Oči in ušesa sistema',
-        text: 'Senzorji merijo, kaj se dogaja v okolju: temperaturo, tlak, položaj, svetlobo, razdaljo. Brez dobrih meritev se sistem ne more pravilno odločiti.',
+        text: 'Senzorji izmerijo položaj, temperaturo ali razdaljo. Sistemu povedo, kaj se dogaja.',
         nature: 'Sestavljene oči in občutljive dlačice, ki zaznajo najmanjši premik zraka.',
         tech: 'Merilnik pretoka, kamera strojnega vida, radar, optični senzor na konici vlakna.',
         subjects: ['Senzorji', 'Senzorska tehnika', 'Signali in obdelava signalov'] },
       { id: 'vodenje', num: '02', label: 'Sistem za vodenje', title: 'Možgani, ki se odločajo',
-        text: 'Iz izmerjenih podatkov sistem za vodenje izračuna, kaj narediti. Tu živijo regulacijski algoritmi, modeli procesov in umetna inteligenca – srce študija avtomatike.',
+        text: 'Algoritem iz meritev izračuna naslednjo potezo: koliko zavrteti motor ali odpreti ventil.',
         nature: 'Drobni možgani, ki stokrat v sekundi popravljajo let.',
         tech: 'Programabilni logični krmilnik (PLC), mikrokrmilnik, industrijski računalnik.',
         subjects: ['Regulacije I in II', 'Teorija sistemov', 'Modeliranje in identifikacije', 'Osnove robotike'] },
       { id: 'aktuatorji', num: '03', label: 'Aktuatorji', title: 'Mišice, ki ukrepajo',
-        text: 'Aktuatorji odločitev spremenijo v dejanje: zavrtijo motor, odprejo ventil, premaknejo robotsko roko. Z njimi sistem vpliva na okolje.',
+        text: 'Motorji, ventili in robotski sklepi pretvorijo ukaz v gibanje.',
         nature: 'Krila in mišice, ki v trenutku spremenijo smer leta.',
         tech: 'Elektromotorji, ventili, pnevmatski valji, sklepi robota.',
         subjects: ['Električni in elektromehanski pretvorniki', 'Gradniki sistemov vodenja', 'Aktuatorska tehnika'] },
       { id: 'energija', num: '04', label: 'Vir energije', title: 'Srce, ki vse poganja',
-        text: 'Vsak sistem potrebuje energijo – in pameten sistem z njo ravna varčno. Močnostna in industrijska elektronika skrbita, da pride energija tja, kjer je potrebna.',
+        text: 'Baterija ali napajalnik poganja napravo. Elektronika poskrbi za pravo napetost in tok.',
         nature: 'Hrana, ki se v mišicah spremeni v gibanje.',
         tech: 'Baterije, napajalniki, vodikova gorivna celica, sončne elektrarne.',
         subjects: ['Industrijska elektronika', 'Sistemi močnostne elektronike'] },
       { id: 'itk', num: '05', label: 'ITK', title: 'Živčni sistem povezav',
-        text: 'Informacijsko-komunikacijske tehnologije povežejo senzorje, krmilnike in ljudi. Tako lahko celotno tovarno ali elektrarno nadziraš z enega zaslona – ali iz telefona.',
+        text: 'Povezave prenašajo podatke med senzorji, krmilniki in tvojim zaslonom.',
         nature: 'Živci, ki prenašajo signale med očmi, možgani in krili.',
         tech: 'Industrijska omrežja, SCADA, internet stvari, brezžične povezave.',
         subjects: ['Komunikacije v avtomatiki', 'Digitalni signalni krmilniki v avtomatiki'] },
       { id: 'zanka', num: '06', label: 'Povratna zveza', title: 'Zakaj sploh deluje',
-        text: 'Sistem opazuje, kako se je okolje odzvalo na njegovo dejanje, in se sproti popravlja. Tako deluje termostat, tempomat v avtu in avtopilot letala. To je bistvo regulacije.',
+        text: 'Sistem znova izmeri rezultat in popravi ukaz. Tako robot ohranja ravnotežje.',
         nature: 'Muha vidi, da jo je zaneslo, in takoj popravi let.',
         tech: 'Regulacija temperature v peči, ravnotežje robota, stabilizacija drona.',
         subjects: ['Regulacije I in II', 'Teorija sistemov', 'Praktikum v avtomatiki in robotiki'] }
@@ -75,7 +75,11 @@ function render(){
 }
 document.addEventListener('click',function(e){
   var b=e.target.closest('[data-node],[data-tab]'); if(!b) return;
-  if(b.dataset.node) state.node=b.dataset.node; else state.tab=b.dataset.tab;
+  if(b.dataset.node) state.node=b.dataset.node;
+  else {
+    state.tab=b.dataset.tab;
+    document.querySelector('.curriculum-disclosure').open=true;
+  }
   render();
   var f=document.querySelector(b.dataset.node?'[data-node="'+state.node+'"]':'[data-tab="'+state.tab+'"]'); if(f) f.focus();
 });
