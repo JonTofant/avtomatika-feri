@@ -38,9 +38,9 @@ Besedila in povezave urejaj v HTML-ju, podatke predmetnikov pa v `js/main.js`.
 
 ### Barve in podrobnosti ilustracij
 
-Osnovna stran uporablja temno modro besedilo in zelen poudarek. Prizor z dronom
-ima toplo ozadje, satelitski prizor modro, roboti pa mint, jantarno in vijolično
-barvo. Barvne spremenljivke so v `:root`; podrobnosti SVG so v 11. sklopu CSS-ja.
+Osnovna stran uporablja temno besedilo in uradno modro UM (`#006385`) za
+naslove, gumbe, povezave in ločilne poudarke. Ozadja so bela ali svetlo modrosiva.
+Barve naprav v ilustracijah ostajajo razlikovalne: modra, jantarna in vijolična. Barvne spremenljivke so v `:root`; podrobnosti SVG so v 11. sklopu CSS-ja.
 
 Kamere, rotorji, radarski sprejemnik, sončne celice in motorni sklepi so del
 obstoječih SVG-skupin, zato sledijo njihovemu gibanju. Notranji obrisi nog uporabljajo
@@ -128,5 +128,8 @@ namesto začetne oznake »F.«. Ohranjeni sta izvirna barva in razmerje stranic.
 Vir: https://www.um.si/wp-content/themes/um_si/assets/images/logo.svg
 Pravila CGP: https://www.um.si/medijsko-sredisce/komunikacijske-vsebine/cgp/
 
-Logotip v glavi je omejen na 70 × 40 px, na telefonu na 60 × 34 px.
+Logotip v glavi je omejen na 68 × 39 px, na telefonu na 60 × 34 px.
 `object-fit: contain` ohrani razmerje stranic; navigacija se po potrebi prelomi.
+Tanka navpična črta ločuje uradni logotip od naslova strani. Spremenljivka
+`--um-blue` povzema barvo iz uradne SVG-datoteke in paketa CGP UM
+(https://prenos.um.si/cgp/splosno.zip).
