@@ -12,6 +12,8 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 - `js/robotics.js` – vožnja dvokolesnega robota ter hoja dvonožca in štirinožca.
 - `assets/images/` – fotografije projektov.
 - `tests/hero.test.cjs` – preverjanje pomikanja in geometrije sledenja.
+- `tests/robotics.test.cjs` – hoja, obračanje koles in vidnost vseh treh robotov.
+- `STUDENT_PROJECT_SOURCES.md` – preverjeni viri in podatki o fotografijah študentskih del.
 
 ## Ogled
 
@@ -66,13 +68,20 @@ izrisni okvir. Časovnikov, neprekinjene animacijske zanke in prestrezanja pomik
 Pod prvim uvodom je temen razdelek `#robotika` s tremi SVG-roboti. Pomik strani
 neposredno določa njihov položaj, vrtenje koles in korake. Noge uporabljajo
 geometrijo dveh členov; med fazo opore stopalo ostane na tleh. Namizni prizor
-se pripne, roboti prečkajo zaslon in se zunaj vidnega dela vrnejo na začetek.
-Na telefonu ostanejo vsi trije vidni, pot pa je krajša. Pomik navzgor obrne
+se pripne za dodatnih 420 px pomika. Roboti se premaknejo po kratki poti
+(160 SVG-enot na namizju, 70 na telefonu); vsi trije ves čas ostanejo vidni. Pomik navzgor obrne
 gibanje. Zmanjšano gibanje in izklopljen JavaScript ohranita mirujoč prikaz.
 Gre za shematsko ilustracijo principov, ne za simulacijo konkretnih robotov.
 
 Opisi imajo krajše odstavke in poudarjene ključne misli. Predmetnik je privzeto
 zložen; odpre se s klikom na naslov ali z izbiro študijskega programa.
+
+### Študentski projekti
+
+Razdelek `#studentski-projekti` je pred vpisom. Predstavlja magistrska dela Jona
+Tofanta (2025), Paneta Andova (2025) in Uroša Kukoviča (2026), s povezavami v DKUM.
+Viri, uradni naslovi in izvor slik so v `STUDENT_PROJECT_SOURCES.md`.
+Slike so lokalne, prikazane v celoti (`object-fit: contain`) in imajo navedene vire.
 
 ## Preverjanje
 
@@ -88,6 +97,9 @@ node --test tests/*.test.cjs
 Testi preverjajo obratno pomikanje, sledenje radarja, lego odtisa SAR na Zemlji,
 omejitve gibanja, združevanje dogodkov in zmanjšano gibanje. Uporabljajo nadomestno
 geometrijo SVG in ne nadomeščajo pregleda v brskalniku.
+
+Dodatni regresijski test preveri, da celotne silhuete vseh treh robotov ostanejo
+znotraj prizora skozi 101 položaj pomikanja na namizju in telefonu.
 
 V brskalniku preveri obe ilustraciji pri pomikanju navzdol in navzgor, mobilni
 prikaz, tipkovnično navigacijo, vseh šest gradnikov zanke ter oba predmetnika.

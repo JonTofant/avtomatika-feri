@@ -23,7 +23,6 @@
   }));
   const clamp = n => Math.max(0, Math.min(1, n));
   const point = (x, y) => `${x.toFixed(2)} ${y.toFixed(2)}`;
-  const wrap = (n, span) => ((n + 180) % span + span) % span - 180;
   let frame = 0;
 
   function legPose(leg, cycle, bob) {
@@ -64,17 +63,16 @@
     const progress = reduced.matches ? 0 : pinned.matches
       ? clamp(-rect.top / Math.max(1, section.offsetHeight - stage.offsetHeight))
       : clamp((window.innerHeight * .85 - sceneRect.top) / (window.innerHeight * .55 + sceneRect.height));
-    // Keep the whole trio in view on a phone; the desktop parade crosses the stage.
-    const travel = progress * (compact.matches ? 70 : width + 120);
+    // A short, bounded journey keeps every robot visible for the entire scene.
+    const travelRange = compact.matches ? 70 : 160;
+    const travel = progress * travelRange;
     const cycle = travel / scale / 120;
     const bipedBob = -2 * Math.cos(cycle * Math.PI * 4);
     const quadCycle = travel / scale / 96;
     const quadBob = -1.5 * Math.cos(quadCycle * Math.PI * 4);
     actors.forEach((actor, i) => {
-      const initial = width * (compact.matches ? .18 + i * .31 : .14 + i * .33);
-      const x = reduced.matches ? initial : compact.matches
-        ? initial + travel - 35
-        : wrap(initial + travel, width + 360);
+      const initial = width * (compact.matches ? .18 + i * .31 : (i + .5) / 3);
+      const x = initial + (reduced.matches ? 0 : travel - travelRange / 2);
       actor.setAttribute('transform', `translate(${point(x, 305)}) scale(${scale})`);
     });
     wheels.forEach(wheel => wheel.setAttribute('transform', `rotate(${(travel / scale / 27 * 180 / Math.PI).toFixed(2)})`));

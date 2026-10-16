@@ -19,7 +19,7 @@ function fixture({ reduced = false, compact = false } = {}) {
   nodes['robotics-world'] = { ...node(), getBoundingClientRect: () => ({ top, height: 370 }) };
   const bar = node();
   const section = {
-    offsetHeight: 2000, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
+    offsetHeight: 1320, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
     querySelector: s => s === '.robotics-stage' ? { offsetHeight: 900 } : bar,
     querySelectorAll: s => s === '.robot-wheel' ? wheels : legs
   };
@@ -38,7 +38,7 @@ function fixture({ reduced = false, compact = false } = {}) {
   const flush = () => { while (frames.length) frames.shift()(); };
   return {
     nodes, legs, frames, events, motion, flush,
-    scroll(p) { top = compact ? 900 * .85 - p * (900 * .55 + 370) : -1100 * p; events.scroll(); flush(); },
+    scroll(p) { top = compact ? 900 * .85 - p * (900 * .55 + 370) : -420 * p; events.scroll(); flush(); },
     snapshot: () => JSON.stringify([nodes, wheels, legs.map(l => l.parts), bar])
   };
 }
@@ -109,4 +109,23 @@ test('reduced motion stays static and scroll events coalesce', () => {
 
 test('safe on pages without the robotics section', () => {
   assert.doesNotThrow(() => vm.runInNewContext(source, { document: { querySelector: () => null } }));
+});
+
+
+test('all three complete robot silhouettes stay on stage for the entire scroll', () => {
+  for (const compact of [false, true]) {
+    const f = fixture({ compact });
+    const width = compact ? 600 : 1200;
+    const scale = compact ? .82 : 1;
+    // Conservative half-widths include wheels, feet, swinging arms and the lidar body.
+    const halfWidths = [62, 62, 96];
+    for (let i = 0; i <= 100; i++) {
+      f.scroll(i / 100);
+      ['robot-wheeled', 'robot-biped', 'robot-quadruped'].forEach((id, n) => {
+        const x = numbers(f.nodes[id].attrs.transform)[0];
+        assert(x - halfWidths[n] * scale >= 0, `${id} left stage at ${i}%`);
+        assert(x + halfWidths[n] * scale <= width, `${id} right stage at ${i}%`);
+      });
+    }
+  }
 });
