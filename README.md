@@ -127,3 +127,6 @@ V glavi strani je lokalna, nespremenjena SVG-datoteka `assets/images/um-logo.svg
 namesto začetne oznake »F.«. Ohranjeni sta izvirna barva in razmerje stranic.
 Vir: https://www.um.si/wp-content/themes/um_si/assets/images/logo.svg
 Pravila CGP: https://www.um.si/medijsko-sredisce/komunikacijske-vsebine/cgp/
+
+Logotip v glavi je omejen na 70 × 40 px, na telefonu na 60 × 34 px.
+`object-fit: contain` ohrani razmerje stranic; navigacija se po potrebi prelomi.
