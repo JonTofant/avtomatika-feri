@@ -302,7 +302,7 @@ p { max-width: 65ch; }
 .robotics-caption { display: flex; justify-content: space-between; gap: 20px; color: #a7c0af; font-size: 12px; margin-top: 30px; max-width: none; }
 .robotics-caption span { font: 10px/1.6 var(--mono); flex-shrink: 0; }
 @media (min-width: 1000px) and (min-height: 900px) {
-  .robotics.is-ready { height: calc(100svh + 420px); }
+  .robotics.is-ready { height: calc(100svh + 900px); }
   .robotics.is-ready .robotics-stage { position: sticky; top: 0; min-height: 100svh; display: flex; align-items: center; }
 }
 @media (max-width: 999px) {
@@ -432,4 +432,56 @@ p { max-width: 65ch; }
   .student-project-image-link { aspect-ratio: 16 / 9; }
   .student-project-content { padding: 20px 24px 26px; }
   .student-project-figure figcaption { min-height: 0; padding-inline: 24px; }
+}
+
+/* 13. LEOSS: a scroll-driven fiber draw tower, with a static fallback. */
+.photonics { background: #f8f5fc; border-top: 1px solid #dfd8ea; }
+.photonics-stage { padding-block: 64px; }
+.photonics-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 5vw, 76px); align-items: center; }
+.photonics-copy { min-width: 0; }
+.photonics .eyebrow { color: #6f548e; }
+.photonics h2 { font-size: clamp(48px, 5.3vw, 76px); line-height: 1.03; letter-spacing: -.055em; }
+.photonics h2 em { font-style: normal; color: #7954a6; }
+.photonics-copy > p:not(.eyebrow):not(.fiber-scroll-hint) { color: var(--muted); max-width: 39ch; margin-top: 22px; }
+.photonics .photonics-copy p.photonics-lead { font-size: 21px; line-height: 1.45; color: var(--ink); }
+.photonics .text-link { display: inline-block; margin-top: 27px; border-color: #9c89b6; }
+.fiber-scroll-hint { color: #75618b; font: 11px/1.7 var(--mono); margin-top: 36px; max-width: 32ch; }
+.fiber-scroll-hint span { font-size: 20px; margin-right: 8px; }
+.fiber-figure { min-width: 0; }
+.fiber-mobile-steps { display: none; }
+.fiber-scene-heading { display: flex; justify-content: space-between; gap: 12px; padding-block: 13px; border-top: 3px solid #9273b7; color: #6f548e; font: 10px/1.5 var(--mono); }
+#fiber-world { width: 100%; height: auto; }
+.fiber-leader { fill: none; stroke: #aea0c4; stroke-width: 1.2; }
+.fiber-svg-number { font: 700 12px 'Courier New', monospace; fill: #8664ad; }
+.fiber-svg-label { font: 600 13px Arial, sans-serif; fill: #35465d; }
+.fiber-svg-note { font: 11px Arial, sans-serif; fill: #69657b; }
+.fiber-progress { height: 2px; background: #e2daec; margin-top: 16px; }
+.fiber-progress span { display: block; height: 100%; background: #9574ba; transform: scaleX(.45); transform-origin: left; }
+.fiber-figure figcaption { font-size: 13px; line-height: 1.6; color: #6b6478; margin-top: 14px; max-width: 62ch; }
+@media (min-width: 1000px) and (min-height: 900px) {
+  .photonics.is-ready { height: calc(100svh + 600px); }
+  .photonics.is-ready .photonics-stage { position: sticky; top: 0; min-height: 100svh; display: flex; align-items: center; }
+}
+@media (max-width: 999px) {
+  .photonics-layout { grid-template-columns: 1fr 1.1fr; gap: 24px; }
+  .photonics h2 { font-size: 48px; }
+  .photonics .photonics-copy p.photonics-lead { font-size: 19px; }
+  .photonics-copy > p { font-size: 14px; }
+}
+@media (max-width: 700px) {
+  .photonics-stage { padding-block: 48px; }
+  .photonics-layout { grid-template-columns: 1fr; gap: 32px; }
+  .photonics h2 { font-size: clamp(48px, 9vw, 64px); }
+  .photonics-copy > p:not(.eyebrow):not(.fiber-scroll-hint) { max-width: 44ch; }
+  .fiber-scroll-hint { margin-top: 24px; max-width: none; }
+  .fiber-scene-heading { font-size: 9px; }
+  .fiber-svg-label, .fiber-svg-note { display: none; }
+  .fiber-svg-number { font-size: 24px; }
+  .fiber-mobile-steps { display: grid; gap: 6px; margin-bottom: 16px; color: var(--ink); font-size: 14px; }
+  .fiber-mobile-steps span { color: #7954a6; font: 11px var(--mono); margin-right: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photonics.is-ready { height: auto; }
+  .photonics.is-ready .photonics-stage { position: static; min-height: 0; }
+  .fiber-scroll-hint, .fiber-progress { display: none; }
 }

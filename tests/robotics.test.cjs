@@ -19,7 +19,7 @@ function fixture({ reduced = false, compact = false } = {}) {
   nodes['robotics-world'] = { ...node(), getBoundingClientRect: () => ({ top, height: 370 }) };
   const bar = node();
   const section = {
-    offsetHeight: 1320, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
+    offsetHeight: 1800, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
     querySelector: s => s === '.robotics-stage' ? { offsetHeight: 900 } : bar,
     querySelectorAll: s => s === '.robot-wheel' ? wheels : legs
   };
@@ -38,7 +38,7 @@ function fixture({ reduced = false, compact = false } = {}) {
   const flush = () => { while (frames.length) frames.shift()(); };
   return {
     nodes, legs, frames, events, motion, flush,
-    scroll(p) { top = compact ? 900 * .85 - p * (900 * .55 + 370) : -420 * p; events.scroll(); flush(); },
+    scroll(p) { top = compact ? 900 * .85 - p * (900 * .55 + 370) : -900 * p; events.scroll(); flush(); },
     snapshot: () => JSON.stringify([nodes, wheels, legs.map(l => l.parts), bar])
   };
 }

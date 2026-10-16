@@ -63,8 +63,8 @@
     const progress = reduced.matches ? 0 : pinned.matches
       ? clamp(-rect.top / Math.max(1, section.offsetHeight - stage.offsetHeight))
       : clamp((window.innerHeight * .85 - sceneRect.top) / (window.innerHeight * .55 + sceneRect.height));
-    // A short, bounded journey keeps every robot visible for the entire scene.
-    const travelRange = compact.matches ? 70 : 160;
+    // A slower, bounded journey keeps every robot visible for the entire scene.
+    const travelRange = compact.matches ? 80 : 200;
     const travel = progress * travelRange;
     const cycle = travel / scale / 120;
     const bipedBob = -2 * Math.cos(cycle * Math.PI * 4);

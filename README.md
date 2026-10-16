@@ -5,13 +5,16 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 
 ## Struktura
 
-- `index.html` – vsebina, struktura in obe SVG-ilustraciji v uvodu.
+- `index.html` – vsebina, struktura in SVG-prizori drona, satelita, robotov in vlečnega stolpa.
 - `css/styles.css` – tema, postavitev in odzivni slogi, razdeljeni po sklopih.
 - `js/main.js` – interaktivna zanka ter predmetnika UN in VS.
 - `js/hero.js` – premikanje drona in satelita glede na položaj strani.
+- `js/fiber.js` – vlečenje optičnega vlakna, valji in navijalni kolut LEOSS.
 - `js/robotics.js` – vožnja dvokolesnega robota ter hoja dvonožca in štirinožca.
 - `assets/images/` – fotografije projektov.
 - `tests/hero.test.cjs` – preverjanje pomikanja in geometrije sledenja.
+- `tests/fiber.test.cjs` – smer vlečenja, obračanje, zmanjšano gibanje in oba načina postavitve.
+- `LEOSS_SOURCES.md` – viri opisa LEOSS in pojasnilo shematskega prikaza.
 - `tests/robotics.test.cjs` – hoja, obračanje koles in vidnost vseh treh robotov.
 - `STUDENT_PROJECT_SOURCES.md` – preverjeni viri in podatki o fotografijah študentskih del.
 
@@ -68,13 +71,26 @@ izrisni okvir. Časovnikov, neprekinjene animacijske zanke in prestrezanja pomik
 Pod prvim uvodom je temen razdelek `#robotika` s tremi SVG-roboti. Pomik strani
 neposredno določa njihov položaj, vrtenje koles in korake. Noge uporabljajo
 geometrijo dveh členov; med fazo opore stopalo ostane na tleh. Namizni prizor
-se pripne za dodatnih 420 px pomika. Roboti se premaknejo po kratki poti
-(160 SVG-enot na namizju, 70 na telefonu); vsi trije ves čas ostanejo vidni. Pomik navzgor obrne
+se pripne za dodatnih 900 px pomika. Roboti se premaknejo po kratki poti
+(200 SVG-enot na namizju, 80 na telefonu); vsi trije ves čas ostanejo vidni. Pomik navzgor obrne
 gibanje. Zmanjšano gibanje in izklopljen JavaScript ohranita mirujoč prikaz.
 Gre za shematsko ilustracijo principov, ne za simulacijo konkretnih robotov.
 
 Opisi imajo krajše odstavke in poudarjene ključne misli. Predmetnik je privzeto
 zložen; odpre se s klikom na naslov ali z izbiro študijskega programa.
+
+### LEOSS / fotonika
+
+Razdelek `#fotonika` za robotiko prikazuje poenostavljen vlečni stolp.
+`js/fiber.js` z istim napredkom pomika poganja oznake podajanja predoblike,
+tok vlakna, nasprotno vrteča se vlečna valja in navijalni kolut. Vroč vrat
+predoblike ostane v peči. Pomik navzgor vrne vse dele v isti predhodni položaj.
+Ne gre za procesno simulacijo ali prikaz konkretne naprave v laboratoriju.
+
+Na dovolj velikem zaslonu se prizor pripne za dodatnih 600 px. Na manjšem
+zaslonu se premika glede na lasten položaj, brez pripenjanja. Oznake korakov
+so na telefonu pod ilustracijo, da ostanejo berljive. Zmanjšano gibanje
+izklopi pripenjanje in prikaže mirujoč položaj; brez JS je prikaz prav tako viden.
 
 ### Študentski projekti
 
@@ -91,6 +107,7 @@ Z nameščenim Node.js:
 node --check js/main.js
 node --check js/hero.js
 node --check js/robotics.js
+node --check js/fiber.js
 node --test tests/*.test.cjs
 ```
 

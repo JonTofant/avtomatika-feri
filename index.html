@@ -9,6 +9,7 @@
 <script src="js/main.js" defer></script>
 <script src="js/hero.js" defer></script>
 <script src="js/robotics.js" defer></script>
+<script src="js/fiber.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Preskoči na vsebino</a>
@@ -231,6 +232,103 @@
   </div>
 </section>
 
+<!-- LEOSS: schematic fiber drawing, with scroll-linked feed and take-up. -->
+<section id="fotonika" class="photonics" aria-labelledby="photonics-title">
+  <div class="photonics-stage">
+    <div class="container photonics-layout">
+      <div class="photonics-copy">
+        <p class="eyebrow">LEOSS / FOTONIKA IN SENZORJI</p>
+        <h2 id="photonics-title">Iz stekla.<br>V vlakno.<br><em>V senzor.</em></h2>
+        <p class="photonics-lead">Kako lahko s svetlobo izmeriš temperaturo, tlak ali raztezek?</p>
+        <p>V laboratoriju LEOSS razvijamo optična vlakna in miniaturne senzorje. Spremembe v svetlobi, ki potuje po vlaknu, nam povedo, kaj se dogaja v njegovi okolici.</p>
+        <a class="text-link" href="https://au.feri.um.si/leoss/">Spoznaj delo laboratorija LEOSS <span aria-hidden="true">↗</span></a>
+        <p class="fiber-scroll-hint"><span aria-hidden="true">↓</span> Pomakni stran in spremljaj nastajanje vlakna.</p>
+      </div>
+      <figure class="fiber-figure">
+        <div class="fiber-scene-heading"><span>OD PREDOBLIKE DO VLAKNA</span><span>01 → 02 → 03</span></div>
+        <svg id="fiber-world" viewBox="0 0 620 560" role="img" aria-labelledby="fiber-title fiber-desc">
+          <title id="fiber-title">Vlečenje optičnega vlakna</title>
+          <desc id="fiber-desc">Steklena predoblika se pomika v peč. Iz segretega dela nastane tanko vlakno, ki ga vlečni valji vodijo do navijalnega koluta. Ob pomikanju strani se valji in kolut vrtijo. Poenostavljen prikaz ni v merilu.</desc>
+          <defs>
+            <linearGradient id="fiber-metal" x1="0" x2="1"><stop stop-color="#a9b4c9"/><stop offset=".35" stop-color="#f2f4fb"/><stop offset=".65" stop-color="#d5dcea"/><stop offset="1" stop-color="#9aa9c2"/></linearGradient>
+            <linearGradient id="fiber-glass" x1="0" x2="1"><stop stop-color="#806cbb" stop-opacity=".25"/><stop offset=".4" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#a9c2ea" stop-opacity=".55"/></linearGradient>
+            <linearGradient id="fiber-heat" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b56165"/><stop offset=".4" stop-color="#ffbd77"/><stop offset=".65" stop-color="#ffe1ac"/><stop offset="1" stop-color="#e78e70"/></linearGradient>
+            <radialGradient id="fiber-halo"><stop stop-color="#ffbc73" stop-opacity=".55"/><stop offset="1" stop-color="#ffbc73" stop-opacity="0"/></radialGradient>
+            <pattern id="fiber-grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#cfc9df"/></pattern>
+            <clipPath id="fiber-feed-window"><rect x="198" y="48" width="30" height="115"/></clipPath>
+          </defs>
+          <rect width="620" height="560" rx="12" fill="#f1edf8"/>
+          <rect x="20" y="20" width="580" height="520" fill="url(#fiber-grid)"/>
+          <ellipse cx="288" cy="508" rx="236" ry="16" fill="#d9d2e7" opacity=".6"/>
+          <!-- Draw tower: rails, cross-members and motorized preform feed. -->
+          <g stroke="#8694ac" stroke-width="1.5" fill="url(#fiber-metal)">
+            <rect x="112" y="44" width="12" height="450" rx="3"/><rect x="302" y="44" width="12" height="450" rx="3"/>
+            <rect x="100" y="486" width="226" height="13" rx="3"/>
+            <rect x="105" y="55" width="216" height="12" rx="3"/>
+            <rect x="124" y="272" width="178" height="9" rx="2"/>
+            <rect x="124" y="339" width="178" height="9" rx="2"/>
+          </g>
+          <g fill="#596780"><circle cx="118" cy="61" r="2.5"/><circle cx="308" cy="61" r="2.5"/><circle cx="118" cy="492" r="2.5"/><circle cx="308" cy="492" r="2.5"/></g>
+          <path d="M184 26H242V51H184Z" fill="#42526c" stroke="#293b54" stroke-width="2"/>
+          <path d="M193 31V44M201 31V44M209 31V44" stroke="#8290a5" stroke-width="2"/>
+          <circle cx="231" cy="38" r="3" fill="#7be4c4"/>
+          <rect x="198" y="49" width="30" height="118" rx="3" fill="url(#fiber-glass)" stroke="#8e8cae" stroke-width="1.5"/>
+          <g clip-path="url(#fiber-feed-window)"><g id="fiber-preform" stroke="#9c8fbc" stroke-width="1.5" opacity=".7"><path d="M202 40H211M202 64H211M202 88H211M202 112H211M202 136H211M202 160H211"/></g></g>
+          <path d="M219 57V130" stroke="#fff" stroke-width="3" opacity=".8"/>
+          <path d="M234 90H280L294 104" class="fiber-leader"/>
+          <text x="335" y="86" class="fiber-svg-number">01</text>
+          <text x="335" y="106" class="fiber-svg-label">Steklena predoblika</text>
+          <text x="335" y="125" class="fiber-svg-note">Začetni kos stekla.</text>
+          <!-- Section through the furnace; the neck stays in the hot zone. -->
+          <ellipse cx="213" cy="199" rx="114" ry="82" fill="url(#fiber-halo)"/>
+          <rect x="140" y="141" width="146" height="116" rx="12" fill="#40516a" stroke="#273b51" stroke-width="2"/>
+          <rect x="153" y="153" width="120" height="92" rx="6" fill="#222f45" stroke="#7c8a9f"/>
+          <rect x="183" y="153" width="60" height="92" rx="5" fill="url(#fiber-heat)"/>
+          <path d="M198 153V173C198 191 210 200 211 224L211 245H215L215 224C216 200 228 191 228 173V153Z" fill="url(#fiber-glass)" stroke="#fff0d5" stroke-width="1.5"/>
+          <path d="M206 157V176Q206 191 213 208V241" fill="none" stroke="#fff9de" stroke-width="2"/>
+          <g stroke="#f7b16a" stroke-width="2.5" fill="none"><path d="M166 165V174L175 179 166 184 175 189 166 194 175 199 166 204 175 209 166 214V231"/><path d="M260 165V174L251 179 260 184 251 189 260 194 251 199 260 204 251 209 260 214V231"/></g>
+          <g fill="#a4adbd"><circle cx="148" cy="150" r="2"/><circle cx="278" cy="150" r="2"/><circle cx="148" cy="248" r="2"/><circle cx="278" cy="248" r="2"/></g>
+          <path d="M286 195H322" class="fiber-leader"/>
+          <text x="335" y="180" class="fiber-svg-number">02</text>
+          <text x="335" y="200" class="fiber-svg-label">Segrevanje in vlečenje</text>
+          <text x="335" y="219" class="fiber-svg-note">Iz stekla nastaja tanko vlakno.</text>
+          <!-- Continuous fiber, traction rollers and guide pulley. -->
+          <path d="M213 245V348Q213 378 243 378H465" fill="none" stroke="#8570bb" stroke-width="4"/>
+          <path id="fiber-flow" d="M213 245V348Q213 378 243 378H465" fill="none" stroke="#ede6ff" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 19"/>
+          <g transform="translate(195 304)"><circle r="18" fill="#52627a" stroke="#b3bdd0" stroke-width="3"/><g data-fiber-roller="1"><path d="M-13 0H13M0-13V13" stroke="#d8dded" stroke-width="3"/><circle cx="9" cy="-9" r="2.5" fill="#c2b0f7"/></g><circle r="5" fill="#293d55"/></g>
+          <g transform="translate(231 304)"><circle r="18" fill="#52627a" stroke="#b3bdd0" stroke-width="3"/><g data-fiber-roller="-1"><path d="M-13 0H13M0-13V13" stroke="#d8dded" stroke-width="3"/><circle cx="9" cy="-9" r="2.5" fill="#c2b0f7"/></g><circle r="5" fill="#293d55"/></g>
+          <path d="M259 290V317M255 312L259 317 263 312" fill="none" stroke="#8b78b3" stroke-width="1.5"/>
+          <circle cx="243" cy="348" r="24" fill="#e1ddea" stroke="#8d91ae" stroke-width="2"/>
+          <circle cx="243" cy="348" r="6" fill="#75829a"/>
+          <path d="M343 370H369M364 366L369 370 364 374" fill="none" stroke="#8b78b3" stroke-width="1.5"/>
+          <!-- Reel, axle and winding; rotating spokes make slow motion legible. -->
+          <path d="M449 442L428 494H502L481 442" fill="url(#fiber-metal)" stroke="#8794ab" stroke-width="2"/>
+          <rect x="414" y="491" width="102" height="9" rx="3" fill="#52627a"/>
+          <circle cx="465" cy="430" r="66" fill="#e4dfef" stroke="#6f7695" stroke-width="2"/>
+          <circle cx="465" cy="430" r="52" fill="#b5a0df" stroke="#7d64ac" stroke-width="2"/>
+          <circle id="fiber-winding" cx="465" cy="430" r="46" fill="none" stroke="#8970b7" stroke-width="10"/>
+          <g id="fiber-reel" stroke="#f2edf9" stroke-width="6" stroke-linecap="round"><path d="M465 414V373M479 422L514 402M479 438L514 458M465 446V487M451 438L416 458M451 422L416 402"/><circle cx="465" cy="370" r="4" fill="#edb967" stroke="none"/></g>
+          <circle cx="465" cy="430" r="17" fill="url(#fiber-metal)" stroke="#536680" stroke-width="2"/>
+          <circle cx="465" cy="430" r="6" fill="#40516a"/>
+          <path d="M465 354V330" class="fiber-leader"/>
+          <text x="368" y="288" class="fiber-svg-number">03</text>
+          <text x="368" y="308" class="fiber-svg-label">Navijanje na kolut</text>
+          <text x="368" y="327" class="fiber-svg-note">Vlakno za nadaljnjo obdelavo.</text>
+          <!-- Small control unit grounds the illustration in automation. -->
+          <rect x="138" y="409" width="145" height="58" rx="6" fill="#e0e4ed" stroke="#a6b1c4"/>
+          <rect x="148" y="420" width="82" height="34" rx="3" fill="#293e53"/>
+          <path d="M155 443H165L170 433 176 439 181 430 187 437H221" fill="none" stroke="#82dec8" stroke-width="1.5"/>
+          <circle cx="246" cy="436" r="6" fill="#8c78b7"/><circle cx="266" cy="436" r="4" fill="#70bca6"/>
+          <path d="M148 409V391H124" fill="none" stroke="#97a3b9" stroke-width="2"/>
+          <text x="28" y="538" class="fiber-svg-note">VLEČNI STOLP / shematski prikaz</text>
+        </svg>
+        <div class="fiber-progress" aria-hidden="true"><span></span></div>
+        <figcaption><ol class="fiber-mobile-steps"><li><span>01</span> Steklena predoblika</li><li><span>02</span> Segrevanje in vlečenje</li><li><span>03</span> Navijanje na kolut</li></ol><p>Pri vlečenju vlakna avtomatika usklajuje segrevanje, hitrost vlečenja in navijanje. Tako nastane osnova za optične senzorje.</p></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ============ KAJ JE AVTOMATIKA ============ -->
 <section id="kaj" class="section">
 <div class="section-inner-wide">
@@ -410,7 +508,7 @@
       <article class="student-project student-project-robot" aria-labelledby="student-robot-title">
         <figure class="student-project-figure">
           <a class="student-project-image-link" href="https://dk.um.si/IzpisGradiva.php?id=94670&amp;lang=slv" aria-label="Magistrsko delo Jona Tofanta v DKUM">
-            <img src="assets/images/student-jon-tofant-robot.png" width="1690" height="884" loading="lazy" decoding="async" alt="Trije položaji Jonovega dvokolesnega robota z gibljivim zgornjim trupom.">
+            <img src="assets/images/student-jon-tofant-robot.png" width="1690" height="884" loading="lazy" decoding="async" alt="Trije položaji dvokolesnega robota z gibljivim zgornjim trupom.">
           </a>
           <figcaption>Vir fotografije: <a href="https://au.feri.um.si/losdv/">LOSDV, UM FERI</a></figcaption>
         </figure>
@@ -418,8 +516,8 @@
           <p class="student-project-topic">Robotika · Vodenje</p>
           <h3 id="student-robot-title">Dvokolesni robot, ki se sam uravnoteži</h3>
           <p class="student-project-author">Jon Tofant <span>Magistrsko delo · 2025</span></p>
-          <p class="student-project-description">Jon je zasnoval in izdelal robota, ki ohranja ravnotežje, premika zgornji trup in premaguje ovire. Mehanska zasnova, senzorji in vodenje delujejo skupaj.</p>
-          <a class="student-project-link" href="https://dk.um.si/IzpisGradiva.php?id=94670&amp;lang=slv">Poglej Jonovo delo v DKUM <span aria-hidden="true">↗</span></a>
+          <p class="student-project-description">Dvokolesni robot ohranja ravnotežje, premika zgornji trup in premaguje ovire. Mehanska zasnova, senzorji in vodenje delujejo skupaj.</p>
+          <a class="student-project-link" href="https://dk.um.si/IzpisGradiva.php?id=94670&amp;lang=slv">Preberi magistrsko delo v DKUM <span aria-hidden="true">↗</span></a>
         </div>
       </article>
       <article class="student-project student-project-drone" aria-labelledby="student-drone-title">
@@ -433,8 +531,8 @@
           <p class="student-project-topic">Strojni vid · Umetna inteligenca</p>
           <h3 id="student-drone-title">Zaznavanje dronov z YOLO in radarjem</h3>
           <p class="student-project-author">Pane Andov <span>Magistrsko delo · 2025</span></p>
-          <p class="student-project-description">Pane je povezal kamero z algoritmom YOLOv8 in radarjem. Kamera prepozna dron, radar pa doda podatke o njegovi razdalji in hitrosti.</p>
-          <a class="student-project-link" href="https://dk.um.si/IzpisGradiva.php?id=94488&amp;lang=slv">Poglej Panetovo delo v DKUM <span aria-hidden="true">↗</span></a>
+          <p class="student-project-description">Sistem povezuje kamero, algoritem YOLOv8 in radar. Kamera prepozna dron, radar pa doda podatke o njegovi razdalji in hitrosti.</p>
+          <a class="student-project-link" href="https://dk.um.si/IzpisGradiva.php?id=94488&amp;lang=slv">Preberi magistrsko delo v DKUM <span aria-hidden="true">↗</span></a>
         </div>
       </article>
       <article class="student-project student-project-landing" aria-labelledby="student-landing-title">
@@ -448,8 +546,8 @@
           <p class="student-project-topic">Avtomatika · Stabilizacija</p>
           <h3 id="student-landing-title">Raketni sistem, ki pristane sam</h3>
           <p class="student-project-author">Uroš Kukovič <span>Magistrsko delo · 2026</span></p>
-          <p class="student-project-description">Uroš je izdelal prototip za lebdenje in navpično pristajanje. Električni ventilator ustvarja potisk, sistem pa spreminja njegovo smer, da ohranja stabilnost.</p>
-          <a class="student-project-link" href="https://dk.um.si/IzpisGradiva.php?id=97606&amp;lang=slv">Poglej Uroševo delo v DKUM <span aria-hidden="true">↗</span></a>
+          <p class="student-project-description">Prototip raketnega sistema omogoča lebdenje in navpično pristajanje. Električni ventilator ustvarja potisk, sistem pa spreminja njegovo smer, da ohranja stabilnost.</p>
+          <a class="student-project-link" href="https://dk.um.si/IzpisGradiva.php?id=97606&amp;lang=slv">Preberi magistrsko delo v DKUM <span aria-hidden="true">↗</span></a>
         </div>
       </article>
     </div>
