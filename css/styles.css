@@ -41,7 +41,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .site-header { border-bottom: 1px solid var(--line); }
 .site-nav { max-width: calc(var(--page-width) + var(--gutter) * 2); margin: auto; padding: 19px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-.brand-mark { background: var(--ink); color: white; border-radius: 8px; width: 39px; height: 39px; border: 1px solid var(--ink); display: grid; place-items: center; font-size: 26px; line-height: 1; letter-spacing: -2px; }
+.brand-logo { width: 112px; height: auto; flex: 0 0 auto; }
 .brand-text { display: grid; gap: 3px; line-height: 1.2; }
 .brand-title { font-size: 15px; font-weight: 600; }
 .brand-subtitle { color: var(--muted); font-size: 10px; letter-spacing: .06em; }

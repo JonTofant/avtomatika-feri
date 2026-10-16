@@ -120,3 +120,10 @@ znotraj prizora skozi 101 položaj pomikanja na namizju in telefonu.
 
 V brskalniku preveri obe ilustraciji pri pomikanju navzdol in navzgor, mobilni
 prikaz, tipkovnično navigacijo, vseh šest gradnikov zanke ter oba predmetnika.
+
+### Logotip Univerze v Mariboru
+
+V glavi strani je lokalna, nespremenjena SVG-datoteka `assets/images/um-logo.svg`
+namesto začetne oznake »F.«. Ohranjeni sta izvirna barva in razmerje stranic.
+Vir: https://www.um.si/wp-content/themes/um_si/assets/images/logo.svg
+Pravila CGP: https://www.um.si/medijsko-sredisce/komunikacijske-vsebine/cgp/
