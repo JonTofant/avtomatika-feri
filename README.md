@@ -31,6 +31,17 @@ Nato odpri <http://localhost:8000>.
 Barve, širino vsebine in odmike nastavi v `:root` na začetku CSS-ja.
 Besedila in povezave urejaj v HTML-ju, podatke predmetnikov pa v `js/main.js`.
 
+### Barve in podrobnosti ilustracij
+
+Osnovna stran uporablja temno modro besedilo in zelen poudarek. Prizor z dronom
+ima toplo ozadje, satelitski prizor modro, roboti pa mint, jantarno in vijolično
+barvo. Barvne spremenljivke so v `:root`; podrobnosti SVG so v 11. sklopu CSS-ja.
+
+Kamere, rotorji, radarski sprejemnik, sončne celice in motorni sklepi so del
+obstoječih SVG-skupin, zato sledijo njihovemu gibanju. Notranji obrisi nog uporabljajo
+`<use>` in lastnosti `--link-color` ter `--link-width`, da ostanejo povezani z isto
+animirano potjo. Ilustracije so shematske in ne predstavljajo določene opreme inštituta.
+
 ### Animaciji v uvodu
 
 Obe ilustraciji sta shematski in nista v merilu. Celotna geometrija je zapisana
@@ -41,7 +52,7 @@ v SVG-ju, brez slik ali animacijskih knjižnic.
   pomik navzgor gibanje obrne.
 - `js/hero.js` bere točke na poteh in usmerja radarsko anteno ter oba snopa.
 - Koordinate radarja in Zemlje v SVG-ju morajo ustrezati konstantama `RADAR` in `EARTH`.
-- Pri širini vsaj 1000 px in višini vsaj 800 px uvod ostane pripet med pomikanjem.
+- Pri širini vsaj 1000 px in višini vsaj 900 px uvod ostane pripet med pomikanjem.
   Dolžino tega dela določa višina `.hero` v CSS-ju. Na manjših zaslonih vsaka scena
   sledi svojemu položaju v vidnem delu strani.
 - `prefers-reduced-motion` prikaže mirujoči ilustraciji in izklopi pripenjanje.

@@ -39,11 +39,11 @@
       <div class="hero-heading">
         <div>
           <p class="eyebrow">Univerza v Mariboru · FERI</p>
-          <h1 id="hero-title">Avtomatika<br>in robotika.</h1>
+          <h1 id="hero-title">Avtomatika<br><span class="title-accent">in robotika.</span></h1>
         </div>
         <div class="hero-intro">
-          <p><strong>Od meritve do gibanja.</strong><br>Nauči se zaznavati okolico in voditi naprave.</p>
-          <a class="text-link" href="#studij">Razišči študij <span aria-hidden="true">↗</span></a>
+          <p><strong>Kako robot naredi prvi korak?</strong><br>Kako radar najde dron? Na FERI spoznaš elektroniko in algoritme, ki to omogočajo.</p>
+          <div class="hero-actions"><a class="primary-link" href="#projekti">Poglej naše projekte <span aria-hidden="true">↗</span></a><a class="text-link" href="#studij">Razišči študij</a></div>
         </div>
       </div>
 
@@ -55,32 +55,41 @@
             <desc id="drone-desc">Dron se ob pomikanju strani premika po ukrivljeni poti. Radarski snop in antena ves čas sledita njegovemu položaju. Shematski prikaz.</desc>
             <defs>
               <pattern id="flight-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" class="scene-grid"/></pattern>
-              <linearGradient id="radar-beam-fill" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#267e69" stop-opacity=".02"/><stop offset="1" stop-color="#267e69" stop-opacity=".19"/></linearGradient>
+              <linearGradient id="radar-beam-fill" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#dd8b20" stop-opacity=".02"/><stop offset="1" stop-color="#dd8b20" stop-opacity=".19"/></linearGradient>
             </defs>
             <rect width="600" height="330" fill="url(#flight-grid)"/>
+            <g class="landscape" aria-hidden="true"><path d="M24 283L188 239 279 273 385 246 576 283Z"/><path d="M411 276V253H437V279M446 279V242H476V278M481 280V259H501V281" class="distant-buildings"/></g>
             <path d="M24 284H576" class="ground-line"/>
             <path d="M30 284L65 273 113 282 172 270 212 282 260 276 315 284 375 269 420 280 468 272 525 282 570 275" class="terrain-line"/>
             <path id="drone-path" d="M80 175 C145 45 235 42 295 135 S440 215 520 80" class="flight-path"/>
             <circle cx="80" cy="175" r="3" class="path-end"/><circle cx="520" cy="80" r="3" class="path-end"/>
             <path id="radar-beam" d="M95 264 L68 169 L92 181 Z" fill="url(#radar-beam-fill)"/>
             <path id="radar-line" d="M95 264L80 175" class="tracking-line"/>
-            <g class="radar-base"><path d="M95 261V283M80 283H110M95 267L83 283M95 267L107 283"/></g>
+            <g class="radar-base"><path d="M95 261V283M80 283H110M95 267L83 283M95 267L107 283"/><rect x="55" y="268" width="22" height="16" rx="2" class="radar-console"/><path d="M77 279H86L92 273" class="radar-cable"/><path d="M59 272H69V277H59Z" class="radar-screen"/><circle cx="72" cy="280" r="1" class="hardware-led"/></g>
             <g id="radar-dish" transform="translate(95 264) rotate(-100)">
-              <path d="M-8-18 Q14 0 -8 18Z" class="dish"/><path d="M0 0H18M18-3V3" class="dish-feed"/>
+              <path d="M2-22Q-23 0 2 22Q-7 0 2-22Z" class="dish"/>
+              <path d="M2-22Q-12 0 2 22M-10-11L1-10M-13 0H0M-10 11L1 10" class="dish-mesh"/>
+              <path d="M-9 0H19M1-17L19 0 1 17" class="dish-feed"/><rect x="17" y="-3" width="6" height="6" rx="1" class="radar-receiver"/>
+              <path d="M28-8Q32 0 28 8M35-13Q41 0 35 13" class="radar-waves"/>
             </g>
             <g id="drone-target" transform="translate(80 175)">
               <circle r="30" class="target-ring"/>
               <path d="M-35-12V-23H-24M24-23H35V-12M35 12V23H24M-24 23H-35V12" class="target-brackets"/>
               <g id="drone-body" class="drone-body">
-                <path d="M-7-3L-26-15M7-3L26-15M-7 4L-26 16M7 4L26 16" class="drone-arms"/>
-                <ellipse cx="-27" cy="-16" rx="15" ry="5"/><ellipse cx="27" cy="-16" rx="15" ry="5"/>
-                <ellipse cx="-27" cy="17" rx="15" ry="5"/><ellipse cx="27" cy="17" rx="15" ry="5"/>
-                <rect x="-10" y="-9" width="20" height="20" rx="5"/><path d="M-5 12V17H5V12"/><circle cy="1" r="3"/>
+                <path d="M-7-3L-27-16M7-3L27-16M-7 4L-27 17M7 4L27 17" class="drone-arms"/>
+                <g class="rotor-guards"><ellipse cx="-27" cy="-16" rx="16" ry="7"/><ellipse cx="27" cy="-16" rx="16" ry="7"/><ellipse cx="-27" cy="17" rx="16" ry="7"/><ellipse cx="27" cy="17" rx="16" ry="7"/></g>
+                <path d="M-40-16H-14M14-16H40M-40 17H-14M14 17H40" class="rotor-blades"/>
+                <g class="rotor-motors"><circle cx="-27" cy="-16" r="3"/><circle cx="27" cy="-16" r="3"/><circle cx="-27" cy="17" r="3"/><circle cx="27" cy="17" r="3"/></g>
+                <path d="M-8-11H8L12-3 9 12H-9L-12-3Z" class="drone-canopy"/>
+                <path d="M-5-7H5M-5-3H5M-4 1H4" class="drone-vents"/>
+                <path d="M-7 11L-11 19M7 11L11 19" class="drone-landing"/>
+                <rect x="-5" y="9" width="10" height="8" rx="2" class="camera-housing"/><circle cy="13" r="2.5" class="camera-lens"/>
+                <circle cx="-11" cy="-4" r="1.5" class="nav-red"/><circle cx="11" cy="-4" r="1.5" class="nav-green"/>
               </g>
             </g>
             <text x="118" y="306" class="svg-label">RADAR</text><text x="416" y="289" class="svg-label subtle">POT LETA</text>
           </svg>
-          <figcaption><h2>Zaznaj. Sledi. Vodi.</h2><p><strong>Radar izmeri položaj.</strong> Algoritem sledi poti drona.</p></figcaption>
+          <figcaption><h2>Zaznaj. Sledi. Vodi.</h2><p><strong>Radar izmeri položaj.</strong> Z obdelavo signalov spremljamo, kje je dron in kako se premika.</p></figcaption>
         </figure>
 
         <figure class="scene scene-earth" data-scene="satellite">
@@ -89,9 +98,9 @@
             <title id="earth-title">Satelit SAR nad Zemljo</title>
             <desc id="earth-desc">Satelit z radarjem s sintetično odprtino se ob pomikanju navzdol premakne z leve na desno po orbitalnem loku. Ob pomikanju navzgor se vrne. Snop kaže območje opazovanja na Zemlji. Shematski prikaz, ni v merilu.</desc>
             <defs>
-              <radialGradient id="ocean" cx="32%" cy="25%" r="80%"><stop stop-color="#e1ece8"/><stop offset=".7" stop-color="#bbd1cc"/><stop offset="1" stop-color="#759b94"/></radialGradient>
+              <radialGradient id="ocean" cx="32%" cy="25%" r="80%"><stop stop-color="#b9e9ff"/><stop offset=".7" stop-color="#68b5e7"/><stop offset="1" stop-color="#2c679d"/></radialGradient>
               <clipPath id="earth-clip"><circle cx="300" cy="183" r="103"/></clipPath>
-              <linearGradient id="sar-beam-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#267e69" stop-opacity=".04"/><stop offset="1" stop-color="#267e69" stop-opacity=".28"/></linearGradient>
+              <linearGradient id="sar-beam-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#497bd9" stop-opacity=".04"/><stop offset="1" stop-color="#497bd9" stop-opacity=".28"/></linearGradient>
             </defs>
             <ellipse cx="300" cy="183" rx="230" ry="123" class="orbit-back"/>
             <circle cx="300" cy="183" r="109" class="atmosphere"/>
@@ -105,6 +114,7 @@
                 <path d="M310 151L335 147 348 163 340 185 326 212 314 204 309 184 296 170Z"/>
                 <path d="M345 164L361 177 366 195 355 188Z M374 215L391 209 405 222 399 235 381 239 370 229Z M343 209L348 216 343 229 338 221Z"/>
               </g>
+              <g class="earth-clouds"><path d="M213 128Q232 119 247 128M267 109Q288 99 307 108M343 194Q365 187 384 195M263 247Q282 253 300 248"/><path d="M211 189Q222 181 237 186M336 132Q350 125 366 132"/></g>
               <g class="globe-grid"><ellipse cx="300" cy="183" rx="48" ry="103"/><ellipse cx="300" cy="183" rx="83" ry="103"/><ellipse cx="300" cy="183" rx="103" ry="36"/><path d="M197 183H403M209 137Q300 159 391 137M209 229Q300 207 391 229M300 80V286"/></g>
             </g>
             <path id="satellite-path" d="M70 183 A230 123 0 0 1 530 183" class="orbit-front"/>
@@ -112,13 +122,18 @@
             <path id="sar-footprint" d="M199 163L197 187" class="sar-footprint"/>
             <g id="satellite" transform="translate(70 183) rotate(-15)" class="satellite-body">
               <path d="M-42-13H-15V13H-42ZM15-13H42V13H15Z" class="solar-panel"/>
-              <path d="M-33-13V13M-24-13V13M24-13V13M33-13V13M-42 0H-15M15 0H42" class="solar-cells"/>
-              <path d="M-15 0H15" class="satellite-strut"/><rect x="-10" y="-13" width="20" height="26" rx="2"/>
+              <path d="M-33-13V13M-24-13V13M24-13V13M33-13V13M-42 0H-15M15 0H42M-42-6H-15M-42 6H-15M15-6H42M15 6H42" class="solar-cells"/>
+              <path d="M-15 0H15" class="satellite-strut"/>
+              <path d="M-10-13L-5-17H11L14-11V11L10 15H-10Z" class="thermal-blanket"/>
+              <rect x="-8" y="-11" width="16" height="23" rx="2" class="satellite-bus"/>
+              <path d="M-6-7H6M-6-2H6M-6 3H6M-3-11V12" class="thermal-seams"/>
+              <circle cx="10" cy="-10" r="2" class="satellite-sensor"/>
               <path d="M-7 15L0 25 10 13Z" class="satellite-antenna"/><path d="M0-14V-22M-4-22H4"/>
+              <path d="M-11 20L-7 29 14 20 10 12Z" class="sar-array"/><path d="M-7 20L-3 26M-2 18L2 24M3 16L7 22M-9 24L12 16" class="sar-array-cells"/>
             </g>
             <text x="34" y="306" class="svg-label">RADAR S SINTETIČNO ODPRTINO</text><text x="493" y="306" class="svg-label subtle">ZEMLJA</text>
           </svg>
-          <figcaption><h2>Opazuj z razdalje.</h2><p><strong>Radar pogleda iz orbite.</strong> Meritve razkrijejo spremembe na površju.</p></figcaption>
+          <figcaption><h2>Opazuj z razdalje.</h2><p><strong>Satelit opazuje Zemljo z radarjem.</strong> SAR je način radarskega slikanja, s katerim spremljamo spremembe površja.</p></figcaption>
         </figure>
       </div>
       <div class="hero-bottom"><span class="scroll-hint"><span aria-hidden="true">↓</span> Pomakni stran in spremljaj gibanje</span><span>Shematska prikaza</span></div>
@@ -140,54 +155,67 @@
         <svg id="robotics-world" viewBox="0 0 1200 370" role="img" aria-labelledby="robots-title robots-desc">
           <title id="robots-title">Dvokolesni robot, dvonožec in štirinožec v gibanju</title>
           <desc id="robots-desc">Shematski roboti se ob pomikanju strani vozijo in korakajo čez prizor. Kolesa se vrtijo, noge izmenjujejo oporo. Prikaz ponazarja ravnotežje, načrtovanje korakov in usklajevanje gibanja.</desc>
-          <defs><pattern id="robot-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#b9dac5" stroke-opacity=".07"/></pattern></defs>
+          <defs><radialGradient id="servo-metal"><stop offset="0" stop-color="#d8e8ed"/><stop offset=".28" stop-color="#91aab6"/><stop offset=".34" stop-color="#1b3445"/><stop offset=".75" stop-color="#304c60"/><stop offset="1" stop-color="#10202e"/></radialGradient><pattern id="robot-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#b9dac5" stroke-opacity=".07"/></pattern></defs>
           <rect width="1600" height="370" fill="url(#robot-grid)"/>
           <path d="M0 306H1600" class="robot-floor"/><path d="M0 326H1600" class="robot-floor-guide"/>
           <g id="robot-wheeled" transform="translate(160 305)" class="robot robot-mint">
             <ellipse cx="0" cy="2" rx="57" ry="7" class="robot-shadow"/>
             <g id="wheeled-body">
-              <path d="M-17-37L-29-94M17-37L28-94" class="robot-link"/>
+              <path d="M-17-37L-29-94M17-37L28-94" id="leg-link-1" class="robot-link"/><use href="#leg-link-1" class="robot-link-inset"/>
               <rect x="-35" y="-142" width="70" height="56" rx="13" class="robot-shell"/>
               <rect x="-23" y="-132" width="46" height="15" rx="5" class="robot-face"/>
               <circle cx="12" cy="-125" r="3" class="robot-eye"/>
               <path d="M-16-104H8M-16-98H2" class="robot-detail"/>
+              <circle cx="-12" cy="-125" r="5" class="robot-camera"/><circle cx="-12" cy="-125" r="2" class="lens-highlight"/>
+              <path d="M23-109V-99M27-109V-99" class="robot-vent"/>
+              <g class="shell-fasteners"><circle cx="-28" cy="-135" r="1.5"/><circle cx="28" cy="-135" r="1.5"/><circle cx="-28" cy="-92" r="1.5"/><circle cx="28" cy="-92" r="1.5"/></g>
+              <rect x="-9" y="-84" width="18" height="20" rx="3" class="robot-controller"/><path d="M-5-80H5M-5-75H5" class="controller-trace"/>
               <path d="M-25-86L0-58 25-86" class="robot-detail"/>
               <circle cy="-58" r="8" class="robot-joint"/>
             </g>
-            <g transform="translate(-18 -27)" opacity=".45"><circle r="27" class="robot-tyre"/><g class="robot-wheel"><path d="M-20 0H20M0-20V20" class="wheel-spoke"/></g></g>
-            <g transform="translate(17 -27)"><circle r="27" class="robot-tyre"/><g class="robot-wheel"><path d="M-20 0H20M0-20V20" class="wheel-spoke"/></g><circle r="8" class="robot-joint"/></g>
+            <g transform="translate(-18 -27)" opacity=".45"><circle r="27" class="robot-tyre"/><g class="robot-wheel"><circle r="20" class="wheel-rim"/><path d="M-20 0H20M0-20V20M-14-14L14 14M-14 14L14-14" class="wheel-spoke"/><path d="M-8-24H8M-8 24H8M-24-8V8M24-8V8" class="tyre-tread"/></g></g>
+            <g transform="translate(17 -27)"><circle r="27" class="robot-tyre"/><g class="robot-wheel"><circle r="20" class="wheel-rim"/><path d="M-20 0H20M0-20V20M-14-14L14 14M-14 14L14-14" class="wheel-spoke"/><path d="M-8-24H8M-8 24H8M-24-8V8M24-8V8" class="tyre-tread"/></g><circle r="8" class="robot-joint"/></g>
             <text x="0" y="-165" class="robot-name">01 / RAVNOTEŽJE</text>
           </g>
           <g id="robot-biped" transform="translate(560 305)" class="robot robot-sand">
             <ellipse cx="0" cy="2" rx="60" ry="7" class="robot-shadow"/>
-            <g class="robot-limb robot-far" data-leg="biped-back"><path d="M0-100L-20-52 20-6" class="robot-link"/><circle cx="-20" cy="-52" r="7" class="robot-joint"/><path d="M10-4H34" class="robot-foot"/></g>
+            <g class="robot-limb robot-far" data-leg="biped-back"><path d="M0-100L-20-52 20-6" id="leg-link-2" class="robot-link"/><use href="#leg-link-2" class="robot-link-inset"/><circle cx="-20" cy="-52" r="7" class="robot-joint"/><path d="M10-4H34" class="robot-foot"/></g>
             <g id="biped-body">
               <rect x="-27" y="-169" width="54" height="62" rx="12" class="robot-shell"/>
               <path d="M-16-108H16L12-96H-12Z" class="robot-shell"/>
               <rect x="-20" y="-205" width="40" height="29" rx="9" class="robot-shell"/>
-              <path d="M-11-191H12" class="robot-eye-line"/>
-              <path d="M0-176V-169" class="robot-link"/>
+              <rect x="-14" y="-198" width="28" height="12" rx="4" class="robot-face"/>
+              <circle cx="-7" cy="-192" r="3" class="robot-camera"/><circle cx="7" cy="-192" r="3" class="robot-camera"/>
+              <circle cx="-7" cy="-193" r="1" class="lens-highlight"/><circle cx="7" cy="-193" r="1" class="lens-highlight"/>
+              <path d="M0-176V-169" id="leg-link-3" class="robot-link"/><use href="#leg-link-3" class="robot-link-inset"/>
               <rect x="-14" y="-155" width="28" height="16" rx="4" class="robot-face"/>
+              <path d="M-10-147H-4L-1-151 3-143 6-147H10" class="controller-trace"/>
+              <path d="M-11-129H11M-11-124H11M-11-119H11" class="robot-vent"/>
+              <g class="shell-fasteners"><circle cx="-20" cy="-161" r="2"/><circle cx="20" cy="-161" r="2"/><circle cx="-20" cy="-113" r="2"/><circle cx="20" cy="-113" r="2"/></g>
               <path id="biped-arm" d="M21-153L39-125 33-104" class="robot-arm"/>
               <circle cx="21" cy="-153" r="7" class="robot-joint"/>
             </g>
-            <g class="robot-limb" data-leg="biped-front"><path d="M0-100L23-52-20-6" class="robot-link"/><circle cx="23" cy="-52" r="7" class="robot-joint"/><path d="M-30-4H-6" class="robot-foot"/></g>
+            <g class="robot-limb" data-leg="biped-front"><path d="M0-100L23-52-20-6" id="leg-link-4" class="robot-link"/><use href="#leg-link-4" class="robot-link-inset"/><circle cx="23" cy="-52" r="7" class="robot-joint"/><path d="M-30-4H-6" class="robot-foot"/></g>
             <text x="0" y="-229" class="robot-name">02 / KORAK</text>
           </g>
           <g id="robot-quadruped" transform="translate(960 305)" class="robot robot-lilac">
             <ellipse cx="0" cy="2" rx="94" ry="7" class="robot-shadow"/>
-            <g class="robot-limb robot-far" data-leg="quad-back-far"><path d="M-49-88L-35-46-65-5" class="robot-link"/><circle cx="-35" cy="-46" r="6" class="robot-joint"/><path d="M-72-4H-58" class="robot-foot"/></g>
-            <g class="robot-limb robot-far" data-leg="quad-front-far"><path d="M49-88L35-46 65-5" class="robot-link"/><circle cx="35" cy="-46" r="6" class="robot-joint"/><path d="M58-4H72" class="robot-foot"/></g>
+            <g class="robot-limb robot-far" data-leg="quad-back-far"><path d="M-49-88L-35-46-65-5" id="leg-link-5" class="robot-link"/><use href="#leg-link-5" class="robot-link-inset"/><circle cx="-35" cy="-46" r="6" class="robot-joint"/><path d="M-72-4H-58" class="robot-foot"/></g>
+            <g class="robot-limb robot-far" data-leg="quad-front-far"><path d="M49-88L35-46 65-5" id="leg-link-6" class="robot-link"/><use href="#leg-link-6" class="robot-link-inset"/><circle cx="35" cy="-46" r="6" class="robot-joint"/><path d="M58-4H72" class="robot-foot"/></g>
             <g id="quad-body">
               <rect x="-67" y="-124" width="134" height="42" rx="12" class="robot-shell"/>
               <rect x="54" y="-142" width="38" height="34" rx="8" class="robot-shell"/>
-              <path d="M76-132V-121" class="robot-eye-line"/>
+              <rect x="71" y="-134" width="15" height="18" rx="4" class="robot-face"/><circle cx="79" cy="-126" r="4.5" class="robot-camera"/><circle cx="80" cy="-127" r="1.6" class="lens-highlight"/>
               <rect x="-39" y="-118" width="55" height="12" rx="4" class="robot-face"/>
+              <path d="M-33-112H-20M-16-112H-3M1-112H10" class="controller-trace"/>
+              <path d="M27-116V-104M32-116V-104M37-116V-104" class="robot-vent"/>
+              <rect x="-19" y="-137" width="29" height="13" rx="3" class="lidar-base"/><ellipse cx="-4" cy="-137" rx="14" ry="4" class="lidar-top"/>
+              <g class="shell-fasteners"><circle cx="-57" cy="-115" r="2"/><circle cx="53" cy="-115" r="2"/><circle cx="-57" cy="-96" r="2"/></g>
               <path d="M-68-110L-86-124" class="robot-detail"/>
               <circle cx="-49" cy="-88" r="9" class="robot-joint"/><circle cx="49" cy="-88" r="9" class="robot-joint"/>
             </g>
-            <g class="robot-limb" data-leg="quad-back"><path d="M-49-88L-32-46-28-5" class="robot-link"/><circle cx="-32" cy="-46" r="6" class="robot-joint"/><path d="M-35-4H-21" class="robot-foot"/></g>
-            <g class="robot-limb" data-leg="quad-front"><path d="M49-88L68-46 28-5" class="robot-link"/><circle cx="68" cy="-46" r="6" class="robot-joint"/><path d="M21-4H35" class="robot-foot"/></g>
+            <g class="robot-limb" data-leg="quad-back"><path d="M-49-88L-32-46-28-5" id="leg-link-7" class="robot-link"/><use href="#leg-link-7" class="robot-link-inset"/><circle cx="-32" cy="-46" r="6" class="robot-joint"/><path d="M-35-4H-21" class="robot-foot"/></g>
+            <g class="robot-limb" data-leg="quad-front"><path d="M49-88L68-46 28-5" id="leg-link-8" class="robot-link"/><use href="#leg-link-8" class="robot-link-inset"/><circle cx="68" cy="-46" r="6" class="robot-joint"/><path d="M21-4H35" class="robot-foot"/></g>
             <text x="0" y="-165" class="robot-name">03 / USKLAJEVANJE</text>
           </g>
         </svg>
@@ -198,7 +226,7 @@
         <article><span class="robot-note-number">02</span><div><h3>Dve nogi. Naslednji korak.</h3><p>Načrtuj oporo, premakni težišče in <strong>uskladi sklepe.</strong></p></div></article>
         <article><span class="robot-note-number">03</span><div><h3>Štiri noge. Skupen ritem.</h3><p>Poveži zaznavanje in vodenje v <strong>usklajeno hojo.</strong></p></div></article>
       </div>
-      <p class="robotics-caption">Od simulacije do robota: preizkusi algoritem, poveži elektroniko in opazuj odziv. <span>Shematski prikaz gibanja.</span></p>
+      <p class="robotics-caption">Kaj bi preizkusil ti? V simulaciji napiši algoritem, nato opazuj, kako se odzove robot. <span>Shematski prikaz gibanja.</span></p>
     </div>
   </div>
 </section>
@@ -291,8 +319,8 @@
 <div class="section-inner-spacious">
 <div class="section-heading">
 <p class="eyebrow-light">RAZISKAVE IN SODELOVANJE</p>
-<h2 class="section-title">Znanje, ki deluje v praksi.</h2>
-<p class="lead-light">Od majhnega senzorja do velikega industrijskega procesa.</p>
+<h2 class="section-title">Poglej, kaj razvijamo.</h2>
+<p class="lead-light">V Inštitutu za avtomatiko razvijamo senzorje, obdelujemo signale in vodimo procese. To so nekateri primeri našega dela.</p>
 </div>
 
 <div class="loop-panels">
@@ -341,7 +369,7 @@
 <div class="section-inner-spacious">
 <div class="section-heading">
 <p class="eyebrow">INŠTITUT ZA AVTOMATIKO</p>
-<h2 class="section-title">Laboratoriji.</h2>
+<h2 class="section-title">Kje lahko začneš raziskovati?</h2>
 <p class="lead"><strong>Najdi področje, ki te zanima.</strong> Razvij ga v projekt, diplomo ali magistrsko nalogo.</p>
 </div>
 <div class="labs-grid">
@@ -372,7 +400,8 @@
 <div class="section-inner-spacious">
 <div class="enrollment-heading">
 <p class="enrollment-eyebrow">VPIS</p>
-<h2 class="section-title">Pot do študija avtomatike.</h2>
+<h2 class="section-title">Te zanima, kako to zgraditi?</h2>
+<p class="enrollment-lead">Začni s študijem Elektrotehnike na FERI in izberi smer Avtomatika in robotika.</p>
 </div>
 <ol class="enrollment-steps">
 <li class="enrollment-step"><span class="enrollment-step-label">KORAK 1</span><h3 class="benefit-title">Vpis na Elektrotehniko</h3><p class="enrollment-step-text">Začneš na <strong>Elektrotehniki na UM FERI.</strong></p></li>

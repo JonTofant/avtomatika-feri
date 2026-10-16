@@ -20,7 +20,7 @@
   const sarBeam = document.getElementById('sar-beam');
   const sarFootprint = document.getElementById('sar-footprint');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pinnedLayout = window.matchMedia('(min-width: 1000px) and (min-height: 800px)');
+  const pinnedLayout = window.matchMedia('(min-width: 1000px) and (min-height: 900px)');
 
   const RADAR = { x: 95, y: 264 };
   const EARTH = { x: 300, y: 183, radius: 103 };

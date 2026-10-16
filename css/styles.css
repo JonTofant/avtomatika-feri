@@ -1,13 +1,18 @@
 /* 1. Theme and document defaults */
 :root {
-  --paper: #f7f8f4;
+  --paper: #fbfaf6;
   --white: #fff;
-  --ink: #18332e;
-  --muted: #5b6e65;
-  --line: #d5ded5;
-  --accent: #267e69;
-  --tint: #eaf0e8;
-  --dark: #183b32;
+  --ink: #193747;
+  --muted: #536976;
+  --line: #d7e1e5;
+  --accent: #087a70;
+  --blue: #315dc4;
+  --amber: #94600d;
+  --violet: #7164bc;
+  --sky: #edf5ff;
+  --warm: #fff4df;
+  --tint: #edf5f3;
+  --dark: #193c4c;
   --mono: 'Courier New', monospace;
   --page-width: 1240px;
   --gutter: clamp(20px, 4vw, 64px);
@@ -36,13 +41,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .site-header { border-bottom: 1px solid var(--line); }
 .site-nav { max-width: calc(var(--page-width) + var(--gutter) * 2); margin: auto; padding: 19px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-.brand-mark { width: 39px; height: 39px; border: 1px solid var(--ink); display: grid; place-items: center; font-size: 26px; line-height: 1; letter-spacing: -2px; }
+.brand-mark { background: var(--ink); color: white; border-radius: 8px; width: 39px; height: 39px; border: 1px solid var(--ink); display: grid; place-items: center; font-size: 26px; line-height: 1; letter-spacing: -2px; }
 .brand-text { display: grid; gap: 3px; line-height: 1.2; }
 .brand-title { font-size: 15px; font-weight: 600; }
 .brand-subtitle { color: var(--muted); font-size: 10px; letter-spacing: .06em; }
 .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; font-size: 14px; }
 .nav-link { text-decoration: none; padding-block: 9px; }
-.nav-cta { text-decoration: none; border-bottom: 1px solid var(--ink); padding-block: 6px; }
+.nav-cta { text-decoration: none; background: var(--accent); color: white; border-radius: 6px; padding: 8px 16px; }
+.nav-cta:hover { background: #08655e; color: white; }
 
 /* 3. Hero and scroll scenes. Geometry lives in the SVG; motion lives in hero.js. */
 .hero-stage { padding-block: 48px 24px; }
@@ -54,44 +60,46 @@ h1 { font-size: clamp(48px, 6.2vw, 88px); letter-spacing: -.055em; line-height: 
 .text-link { text-decoration: none; font-size: 14px; padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
 .text-link span { margin-left: 30px; }
 .hero-scenes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
-.scene { min-width: 0; border-top: 1px solid var(--ink); }
-.scene-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; font: 10px/1.5 var(--mono); }
+.scene { --scene-color: var(--amber); min-width: 0; border-top: 3px solid var(--scene-color); }
+.scene-earth { --scene-color: var(--blue); }
+.scene-heading { color: var(--scene-color); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; font: 10px/1.5 var(--mono); }
 .scene-status { display: flex; align-items: center; gap: 7px; color: var(--muted); }
-.scene-status i { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
-.scene-svg { width: 100%; height: auto; overflow: hidden; }
+.scene-status i { width: 5px; height: 5px; background: var(--scene-color); border-radius: 50%; }
+.scene-svg { width: 100%; height: auto; overflow: hidden; background: #fff7e8; border-radius: 8px; margin-top: 12px; }
+.scene-earth .scene-svg { background: #edf4ff; }
 .scene figcaption { display: grid; grid-template-columns: 1fr 1.45fr; gap: 20px; padding-top: 13px; border-top: 1px solid var(--line); }
 .scene h2 { font-size: clamp(17px, 1.6vw, 22px); letter-spacing: -.03em; }
 .scene figcaption p { font-size: 13px; line-height: 1.6; color: var(--muted); }
 .hero-bottom { margin-top: 26px; display: flex; justify-content: space-between; gap: 20px; font: 10px/1.5 var(--mono); color: var(--muted); }
 .scroll-hint > span { font-size: 16px; margin-right: 8px; }
-.scene-grid { fill: none; stroke: #dce3da; stroke-width: .6; }
+.scene-grid { fill: none; stroke: #dfd6bc; stroke-width: .6; }
 .ground-line { fill: none; stroke: #b9c7ba; stroke-width: 1; }
 .terrain-line { fill: none; stroke: #d3ddd1; stroke-width: 1; }
-.flight-path { fill: none; stroke: #9eafa0; stroke-width: 1.2; stroke-dasharray: 3 6; }
-.path-end { fill: #9eafa0; }
-.tracking-line { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 4 5; }
-.target-ring { fill: none; stroke: var(--accent); stroke-opacity: .2; }
-.target-brackets { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.flight-path { fill: none; stroke: #b9914c; stroke-width: 1.2; stroke-dasharray: 3 6; }
+.path-end { fill: #d28a24; }
+.tracking-line { fill: none; stroke: #c78019; stroke-width: 1; stroke-dasharray: 4 5; }
+.target-ring { fill: none; stroke: #c78019; stroke-opacity: .2; }
+.target-brackets { fill: none; stroke: #b77412; stroke-width: 1.4; }
 .radar-base { stroke: var(--ink); stroke-width: 2; fill: none; }
-.dish { fill: #d0dfcf; stroke: var(--ink); stroke-width: 1.7; }
-.dish-feed { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.dish { fill: #c3d8df; stroke: var(--ink); stroke-width: 1.7; }
+.dish-feed { stroke: var(--ink); stroke-width: 1; fill: none; }
 .drone-body { stroke: var(--ink); stroke-width: 1.8; fill: var(--paper); }
 .drone-arms { stroke-width: 3; }
 .svg-label { font: 10px var(--mono); letter-spacing: 1px; fill: var(--muted); }
 .svg-label.subtle { fill: #75877a; }
-.orbit-back { fill: none; stroke: #d5ded5; stroke-width: 1; stroke-dasharray: 3 6; }
-.orbit-front { fill: none; stroke: #90aa9b; stroke-width: 1; stroke-dasharray: 3 6; }
-.atmosphere { fill: none; stroke: #d8e5dd; stroke-width: 1; }
-.continents { fill: #668978; stroke: #779786; stroke-width: .5; }
-.globe-grid { fill: none; stroke: #51776b; stroke-opacity: .2; stroke-width: .8; }
+.orbit-back { fill: none; stroke: #bfd1eb; stroke-width: 1; stroke-dasharray: 3 6; }
+.orbit-front { fill: none; stroke: #7a9bc7; stroke-width: 1; stroke-dasharray: 3 6; }
+.atmosphere { fill: none; stroke: #8ecbee; stroke-width: 2; }
+.continents { fill: #58a98a; stroke: #3c8a78; stroke-width: .5; }
+.globe-grid { fill: none; stroke: #295b89; stroke-opacity: .2; stroke-width: .8; }
 .satellite-body { fill: #e9e8d7; stroke: var(--ink); stroke-width: 1.5; }
-.solar-panel { fill: #426b70; }
-.solar-cells { fill: none; stroke: #9eb7b2; stroke-width: .7; }
+.solar-panel { fill: #2855a0; }
+.solar-cells { fill: none; stroke: #80b6ec; stroke-width: .7; }
 .satellite-strut { stroke-width: 4; }
 .satellite-antenna { fill: #faf8e8; }
-.sar-footprint { stroke: var(--accent); stroke-width: 4; stroke-linecap: round; fill: none; }
+.sar-footprint { stroke: #305fc8; stroke-width: 4; stroke-linecap: round; fill: none; }
 /* Pin only when both scenes and captions fit comfortably in the viewport. */
-@media (min-width: 1000px) and (min-height: 800px) {
+@media (min-width: 1000px) and (min-height: 900px) {
   .hero { height: calc(100svh + 650px); }
   .hero-stage { position: sticky; top: 0; min-height: 100svh; display: flex; align-items: center; }
 }
@@ -228,7 +236,7 @@ strong { color: var(--ink); font-weight: 700; }
 p { max-width: 65ch; }
 .hero-intro strong { display: inline-block; margin-bottom: 6px; }
 .scene figcaption { grid-template-columns: 1fr; gap: 9px; }
-.scene figcaption p { font-size: 15px; max-width: 43ch; }
+.scene figcaption p { font-size: 15px; max-width: 60ch; }
 .scene h2 { font-size: clamp(21px, 2vw, 27px); }
 .section-title { max-width: 20ch; line-height: 1.1; }
 .section-heading, .loop-heading { max-width: 760px; }
@@ -251,12 +259,12 @@ p { max-width: 65ch; }
 .curriculum-disclosure .curriculum-grid { padding: 10px 0 32px; }
 
 /* 10. Robotics: a full-width stage with a scroll-driven walking cycle. */
-.robotics { background: #142f29; color: #f2f5ed; border-top: 1px solid #304b40; }
+.robotics { background: #142e40; color: #f2f6fc; border-top: 1px solid #304b60; }
 .robotics-stage { padding-block: 56px 40px; }
 .robotics-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 32px; }
 .robotics .eyebrow { color: #a9c4b2; }
 .robotics h2 { font-size: clamp(48px, 6.6vw, 86px); letter-spacing: -.055em; line-height: .99; }
-.robotics h2 em { font-style: normal; color: #b7e7c6; }
+.robotics h2 em { font-style: normal; color: #70e6bd; }
 .robotics-intro { max-width: 340px; padding-bottom: 5px; }
 .robotics-intro p { color: #b8cbbf; font-size: 17px; line-height: 1.65; margin-bottom: 20px; }
 .robotics strong { color: #f2f5ed; }
@@ -267,21 +275,21 @@ p { max-width: 65ch; }
 #robotics-world { width: 100%; height: auto; overflow: hidden; }
 .robot-floor { stroke: #8eac99; stroke-width: 1.2; }
 .robot-floor-guide { stroke: #557161; stroke-width: 1; stroke-dasharray: 2 14; }
-.robot { --robot-color: #b7e7c6; }
-.robot-sand { --robot-color: #f2cf91; }
-.robot-lilac { --robot-color: #c4bce8; }
-.robot-shell { fill: var(--robot-color); stroke: #102720; stroke-width: 3; }
-.robot-link { stroke: var(--robot-color); stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.robot { --robot-color: #70e6bd; }
+.robot-sand { --robot-color: #ffcc6e; }
+.robot-lilac { --robot-color: #b0acff; }
+.robot-shell { fill: var(--robot-color); stroke: #0c2434; stroke-width: 3; }
+.robot-link { stroke: var(--link-color, var(--robot-color)); stroke-width: var(--link-width, 14); stroke-linecap: round; stroke-linejoin: round; fill: none; }
 .robot-arm { stroke: var(--robot-color); stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-.robot-joint { fill: #203d32; stroke: var(--robot-color); stroke-width: 3; }
-.robot-face { fill: #25453a; }
+.robot-joint { fill: url(#servo-metal); stroke: var(--robot-color); stroke-width: 3; }
+.robot-face { fill: #193747; }
 .robot-eye { fill: #d8ffe2; }
 .robot-eye-line { stroke: #214536; stroke-width: 5; stroke-linecap: round; }
 .robot-detail { stroke: #456a55; stroke-width: 2; fill: none; }
 .robot-foot { stroke: var(--robot-color); stroke-width: 9; stroke-linecap: round; }
-.robot-tyre { fill: #11261f; stroke: var(--robot-color); stroke-width: 5; }
+.robot-tyre { fill: #0c2332; stroke: var(--robot-color); stroke-width: 5; }
 .wheel-spoke { stroke: var(--robot-color); stroke-width: 3; }
-.robot-shadow { fill: #081d16; opacity: .7; }
+.robot-shadow { fill: #061a29; opacity: .7; }
 .robot-far { opacity: .38; }
 .robot-name { fill: var(--robot-color); font: 10px var(--mono); text-anchor: middle; letter-spacing: 1px; }
 .robotics-progress { height: 2px; background: #385347; }
@@ -325,4 +333,76 @@ p { max-width: 65ch; }
   .robotics.is-ready { height: auto; }
   .robotics.is-ready .robotics-stage { position: static; min-height: 0; }
   .robotics-scroll-label, .robotics-progress { visibility: hidden; }
+}
+
+/* 11. Student-facing accents and hardware details.
+   The coloured SVG parts stay attached to the existing animated groups. */
+.title-accent { color: var(--accent); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.primary-link { display: inline-flex; align-items: center; gap: 16px; padding: 11px 16px; background: var(--accent); color: white; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.primary-link:hover { background: #08655e; color: white; }
+.hero-actions .text-link { font-size: 13px; }
+.scene-heading > span:first-child { font-weight: 700; }
+.scene h2 { color: var(--scene-color); }
+.landscape { fill: #e9ead3; opacity: .65; }
+.distant-buildings { fill: #d5dfd3; stroke: #b7c8c7; stroke-width: 1; }
+.radar-console { fill: #294657; stroke-width: 1; }
+.radar-screen { fill: #88dbc3; stroke: none; }
+.radar-cable { stroke-width: 1; }
+.hardware-led { fill: #ffc964; stroke: none; }
+.dish-mesh { fill: none; stroke: #688d9d; stroke-width: .7; }
+.radar-receiver { fill: #e7a83b; stroke: #193747; stroke-width: 1; }
+.radar-waves { fill: none; stroke: #cb8419; stroke-width: 1.2; opacity: .5; }
+.rotor-guards { fill: #e6f0ee; fill-opacity: .7; stroke: #476675; stroke-width: 1; }
+.rotor-blades { stroke: #294657; stroke-width: 2.8; stroke-linecap: round; }
+.rotor-motors { fill: #a9c1ca; stroke: #193747; stroke-width: 1; }
+.drone-canopy { fill: #f2b951; stroke: #674f2b; stroke-width: 1.2; }
+.drone-vents { stroke: #93641f; stroke-width: 1; fill: none; }
+.drone-landing { fill: none; stroke: #476675; stroke-width: 1.4; }
+.camera-housing { fill: #243e50; stroke-width: 1; }
+.camera-lens { fill: #74d5f0; stroke: #173651; stroke-width: .8; }
+.nav-red { fill: #e96954; stroke: none; }
+.nav-green { fill: #087f73; stroke: none; }
+.earth-clouds { fill: none; stroke: #fff; stroke-opacity: .65; stroke-width: 5; stroke-linecap: round; }
+.thermal-blanket { fill: #e7b960; stroke: #95713b; stroke-width: 1; }
+.satellite-bus { fill: #f6d797; stroke: #a48651; stroke-width: .7; }
+.thermal-seams { fill: none; stroke: #bd984e; stroke-width: .7; }
+.satellite-sensor { fill: #81c8ee; stroke: #204665; stroke-width: .8; }
+.sar-array { fill: #e3eaf5; stroke: #405c79; stroke-width: 1; }
+.sar-array-cells { fill: none; stroke: #6a8dac; stroke-width: .7; }
+.robot-link-inset { --link-color: #284b60; --link-width: 4; fill: none; stroke: #284b60; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.robot-camera { fill: #66bdea; stroke: #a3e5ff; stroke-width: 1; }
+.lens-highlight { fill: #e8faff; stroke: none; }
+.robot-vent { fill: none; stroke: #415263; stroke-width: 2; stroke-linecap: round; }
+.shell-fasteners { fill: #344b5e; }
+.robot-controller { fill: #24495c; stroke: var(--robot-color); stroke-width: 1.5; }
+.controller-trace { fill: none; stroke: #85e5d4; stroke-width: 1.4; stroke-linecap: round; }
+.lidar-base { fill: #38566c; stroke: var(--robot-color); stroke-width: 1.5; }
+.lidar-top { fill: #80d4ed; stroke: #16364b; stroke-width: 1; }
+.wheel-rim { fill: none; stroke: #5e8495; stroke-width: 2; }
+.tyre-tread { fill: none; stroke: #c7e0e8; stroke-width: 2; stroke-linecap: round; }
+.robotics-notes article:nth-child(1) .robot-note-number { color: #70e6bd; }
+.robotics-notes article:nth-child(2) .robot-note-number { color: #ffcc6e; }
+.robotics-notes article:nth-child(3) .robot-note-number { color: #b0acff; }
+.robot-note-number { min-width: 28px; padding-bottom: 8px; border-bottom: 2px solid currentColor; align-self: flex-start; }
+.applications > div { border-top-width: 3px; }
+.applications > div:nth-child(1) { border-color: var(--accent); }
+.applications > div:nth-child(2) { border-color: var(--amber); }
+.applications > div:nth-child(3) { border-color: var(--blue); }
+.loop-node[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+#projekti { background: #fff6e7; }
+.featured-project, .project-list-item { border-color: #e5d8c1; }
+.featured-project-image, .project-image { border-radius: 6px; }
+.lab-card { --lab-accent: var(--blue); border-top: 3px solid var(--lab-accent); }
+.lab-card:nth-child(2) { --lab-accent: var(--accent); }
+.lab-card:nth-child(3) { --lab-accent: var(--violet); }
+.lab-code { color: var(--lab-accent); font-weight: 700; }
+.enrollment-lead { color: #d0e2e7; margin-top: 18px; max-width: 50ch; }
+.button-white { background: #f8cc71; color: #193747; padding: 11px 18px; border: none; border-radius: 6px; font-weight: 600; }
+.enrollment-actions { align-items: center; }
+.section-enrollment .button-white:hover { color: #193747; background: #ffdc97; }
+@media (max-width: 700px) {
+  .hero-actions { gap: 16px; }
+  .primary-link { font-size: 13px; padding: 10px 14px; }
+  .scene figcaption p { font-size: 14px; }
 }
