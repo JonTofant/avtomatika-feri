@@ -3,9 +3,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
-const source = fs.readFileSync(path.join(__dirname, '../js/robotics.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../js/scroll-scene.js'), 'utf8') + '\n' +
+  fs.readFileSync(path.join(__dirname, '../js/robotics.js'), 'utf8');
 
-function fixture({ reduced = false, compact = false } = {}) {
+function fixture({ reduced = false, compact = false, viewportHeight = 900, stageHeight = 900 } = {}) {
   const events = {}, frames = [];
   let top = 0;
   const node = () => ({ attrs: {}, style: {}, setAttribute(k, v) { this.attrs[k] = v; } });
@@ -18,9 +19,11 @@ function fixture({ reduced = false, compact = false } = {}) {
   const wheels = [node(), node()];
   nodes['robotics-world'] = { ...node(), getBoundingClientRect: () => ({ top, height: 370 }) };
   const bar = node();
+  const stage = { offsetHeight: stageHeight };
   const section = {
-    offsetHeight: 1800, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
-    querySelector: s => s === '.robotics-stage' ? { offsetHeight: 900 } : bar,
+    get offsetHeight() { return stage.offsetHeight + 900; },
+    style: { setProperty(k, v) { this[k] = v; } }, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
+    querySelector: s => s === '.robotics-stage' ? stage : bar,
     querySelectorAll: s => s === '.robot-wheel' ? wheels : legs
   };
   const motion = { matches: reduced, addEventListener: (_, f) => { events.motion = f; } };
@@ -29,7 +32,7 @@ function fixture({ reduced = false, compact = false } = {}) {
   vm.runInNewContext(source, {
     document: { querySelector: () => section, getElementById: id => nodes[id] },
     window: {
-      innerHeight: 900,
+      innerHeight: viewportHeight,
       matchMedia: q => q.includes('reduced-motion') ? motion : q.includes('max-width') ? phone : layout,
       addEventListener: (e, f) => { events[e] = f; },
       requestAnimationFrame: f => { frames.push(f); return frames.length; }
@@ -37,8 +40,8 @@ function fixture({ reduced = false, compact = false } = {}) {
   });
   const flush = () => { while (frames.length) frames.shift()(); };
   return {
-    nodes, legs, frames, events, motion, flush,
-    scroll(p) { top = compact ? 900 * .85 - p * (900 * .55 + 370) : -900 * p; events.scroll(); flush(); },
+    nodes, legs, frames, events, motion, flush, section, stage,
+    scroll(p) { top = compact ? 900 * .85 - p * (900 * .55 + 370) : Math.min(0, viewportHeight - stage.offsetHeight) - 900 * p; events.scroll(); flush(); },
     snapshot: () => JSON.stringify([nodes, wheels, legs.map(l => l.parts), bar])
   };
 }
@@ -108,7 +111,7 @@ test('reduced motion stays static and scroll events coalesce', () => {
 });
 
 test('safe on pages without the robotics section', () => {
-  assert.doesNotThrow(() => vm.runInNewContext(source, { document: { querySelector: () => null } }));
+  assert.doesNotThrow(() => vm.runInNewContext(source, { window: {}, document: { querySelector: () => null } }));
 });
 
 
@@ -127,5 +130,15 @@ test('all three complete robot silhouettes stay on stage for the entire scroll',
         assert(x + halfWidths[n] * scale <= width, `${id} right stage at ${i}%`);
       });
     }
+  }
+});
+
+test('robot gait uses the full pinned distance in a short laptop window', () => {
+  const reference = fixture();
+  const f = fixture({ viewportHeight: 650, stageHeight: 810 });
+  assert.equal(f.section.style['--sticky-top'], '-160px');
+  for (const p of [0, .2, .5, 1, .5, 0]) {
+    reference.scroll(p); f.scroll(p);
+    assert.equal(f.snapshot(), reference.snapshot());
   }
 });

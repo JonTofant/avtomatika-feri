@@ -8,10 +8,12 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 - `index.html` – vsebina, struktura in SVG-prizori drona, satelita, robotov in vlečnega stolpa.
 - `css/styles.css` – tema, postavitev in odzivni slogi, razdeljeni po sklopih.
 - `js/main.js` – interaktivna zanka ter predmetnika UN in VS.
+- `js/scroll-scene.js` – skupno merjenje višine pripetih prizorov in združljivost dogodkov.
 - `js/hero.js` – premikanje drona in satelita glede na položaj strani.
 - `js/fiber.js` – vlečenje optičnega vlakna, valji in navijalni kolut LEOSS.
 - `js/robotics.js` – vožnja dvokolesnega robota ter hoja dvonožca in štirinožca.
 - `assets/images/` – fotografije projektov.
+- `tests/scroll-scene.test.cjs` – višina prizora, spremembe postavitve in združljivost poslušalcev.
 - `tests/hero.test.cjs` – preverjanje pomikanja in geometrije sledenja.
 - `tests/fiber.test.cjs` – smer vlečenja, obračanje, zmanjšano gibanje in oba načina postavitve.
 - `LEOSS_SOURCES.md` – viri opisa LEOSS in pojasnilo shematskega prikaza.
@@ -57,8 +59,8 @@ v SVG-ju, brez slik ali animacijskih knjižnic.
   pomik navzgor gibanje obrne.
 - `js/hero.js` bere točke na poteh in usmerja radarsko anteno ter oba snopa.
 - Koordinate radarja in Zemlje v SVG-ju morajo ustrezati konstantama `RADAR` in `EARTH`.
-- Pri širini vsaj 1000 px in višini vsaj 900 px uvod ostane pripet med pomikanjem.
-  Dolžino tega dela določa višina `.hero` v CSS-ju. Na manjših zaslonih vsaka scena
+- Pri širini vsaj 900 px uvod ostane pripet med pomikanjem ne glede na višino okna.
+  Višina razdelka je dejanska višina vsebine + 650 px poti. Na ožjih zaslonih vsaka scena
   sledi svojemu položaju v vidnem delu strani.
 - `prefers-reduced-motion` prikaže mirujoči ilustraciji in izklopi pripenjanje.
   Brez JavaScripta sta obe ilustraciji še vedno vidni v začetnem položaju.
@@ -87,7 +89,7 @@ tok vlakna, nasprotno vrteča se vlečna valja in navijalni kolut. Vroč vrat
 predoblike ostane v peči. Pomik navzgor vrne vse dele v isti predhodni položaj.
 Ne gre za procesno simulacijo ali prikaz konkretne naprave v laboratoriju.
 
-Na dovolj velikem zaslonu se prizor pripne za dodatnih 600 px. Na manjšem
+Pri širini vsaj 900 px se prizor pripne za dodatnih 600 px. Na ožjem
 zaslonu se premika glede na lasten položaj, brez pripenjanja. Oznake korakov
 so na telefonu pod ilustracijo, da ostanejo berljive. Zmanjšano gibanje
 izklopi pripenjanje in prikaže mirujoč položaj; brez JS je prikaz prav tako viden.
@@ -105,6 +107,7 @@ Z nameščenim Node.js:
 
 ```sh
 node --check js/main.js
+node --check js/scroll-scene.js
 node --check js/hero.js
 node --check js/robotics.js
 node --check js/fiber.js
@@ -133,3 +136,29 @@ Logotip v glavi je omejen na 68 × 39 px, na telefonu na 60 × 34 px.
 Tanka navpična črta ločuje uradni logotip od naslova strani. Spremenljivka
 `--um-blue` povzema barvo iz uradne SVG-datoteke in paketa CGP UM
 (https://prenos.um.si/cgp/splosno.zip).
+
+### Pripenjanje prizorov na prenosnikih in v različnih brskalnikih
+
+Prejšnja omejitev `min-height: 900px` je izklopila pripenjanje v običajnih
+oknih prenosnikov, ob povečavi in pri skaliranju zaslona. Vsi trije prizori
+zdaj uporabljajo isti pogoj `min-width: 900px`, brez omejitve višine.
+
+`scroll-scene.js` mora biti naložen pred `hero.js`, `robotics.js` in `fiber.js`.
+Izmeri dejansko višino notranjega prizora in nastavi `--stage-height` ter
+`--sticky-top`. Če je vsebina višja od okna, se najprej naravno pomakne navzgor,
+nato se njen spodnji rob pripne ob spodnji rob okna. Napredek animacije začne
+teči šele pri tem odmiku, zato ostane na voljo celotnih 650 / 900 / 600 px poti.
+Ni prestrezanja koleščka, blokiranja pomikanja ali zaklepanja strani.
+
+Slogi za krajša namizna okna zmanjšajo naslove, odmike in višino ilustracij.
+Sprememba velikosti okna, povratek na stran, sprememba sistemske nastavitve
+gibanja in (kjer je na voljo) ResizeObserver osvežijo postavitev. `100vh` je
+osnovna združljiva enota; pripenjanje ni odvisno od podpore za `svh`.
+Za starejši Safari je dodan nadomestni `MediaQueryList.addListener`.
+
+Na ožjih zaslonih ostaja običajno pomikanje. Pri `prefers-reduced-motion`
+prizori ostanejo mirujoči in niso pripeti. Brez JavaScripta se tudi uvod ne pripne.
+
+Regresijski testi vključujejo okna višine 600, 720, 768, 800 in 900 px,
+vsebino višjo od okna, povratno pomikanje ter spremembo višine med uporabo.
+To so testi geometrije in dogodkov z nadomestnim DOM-om, ne testi izrisa v brskalnikih.

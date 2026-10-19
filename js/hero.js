@@ -20,7 +20,7 @@
   const sarBeam = document.getElementById('sar-beam');
   const sarFootprint = document.getElementById('sar-footprint');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pinnedLayout = window.matchMedia('(min-width: 1000px) and (min-height: 900px)');
+  const pinnedLayout = window.matchMedia('(min-width: 900px)');
 
   const RADAR = { x: 95, y: 264 };
   const EARTH = { x: 300, y: 183, radius: 103 };
@@ -30,12 +30,13 @@
   const droneLength = dronePath.getTotalLength();
   const satelliteLength = satellitePath.getTotalLength();
   let pendingFrame = 0;
+  let stickyTop = 0;
 
   function progressFor(scene) {
     if (reducedMotion.matches) return 0.48;
     if (pinnedLayout.matches) {
       const travel = hero.offsetHeight - stage.offsetHeight;
-      return clamp(-hero.getBoundingClientRect().top / Math.max(1, travel));
+      return clamp((stickyTop - hero.getBoundingClientRect().top) / Math.max(1, travel));
     }
     // On smaller screens each illustration follows its own passage through the viewport.
     const rect = scene.getBoundingClientRect();
@@ -80,6 +81,7 @@
 
   function render() {
     pendingFrame = 0;
+    stickyTop = window.ScrollScene.measure(hero, stage);
     drawDrone(progressFor(droneScene));
     drawSatellite(progressFor(satelliteScene));
   }
@@ -88,10 +90,12 @@
     if (!pendingFrame) pendingFrame = window.requestAnimationFrame(render);
   }
 
+  hero.classList.add('is-ready');
+  window.ScrollScene.observe(stage, scheduleRender);
   window.addEventListener('scroll', scheduleRender, { passive: true });
   window.addEventListener('resize', scheduleRender);
   window.addEventListener('pageshow', scheduleRender);
-  reducedMotion.addEventListener('change', scheduleRender);
-  pinnedLayout.addEventListener('change', scheduleRender);
+  window.ScrollScene.listen(reducedMotion, scheduleRender);
+  window.ScrollScene.listen(pinnedLayout, scheduleRender);
   render();
 })();

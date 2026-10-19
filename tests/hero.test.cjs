@@ -5,9 +5,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
-const source = fs.readFileSync(path.join(__dirname, '../js/hero.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../js/scroll-scene.js'), 'utf8') + '\n' +
+  fs.readFileSync(path.join(__dirname, '../js/hero.js'), 'utf8');
 
-function fixture({ reduced = false, pinned = true } = {}) {
+function fixture({ reduced = false, pinned = true, viewportHeight = 900, stageHeight = 900 } = {}) {
   const events = {};
   const frames = [];
   let heroTop = 0;
@@ -20,17 +21,18 @@ function fixture({ reduced = false, pinned = true } = {}) {
   nodes['drone-path'].getPointAtLength = length => ({ x: 80 + length * 4.4, y: 140 - Math.sin(length / 100 * Math.PI * 2) * 55 });
   nodes['satellite-path'].getTotalLength = () => 100;
   nodes['satellite-path'].getPointAtLength = length => ({ x: 300 - 230 * Math.cos(length / 100 * Math.PI), y: 183 - 123 * Math.sin(length / 100 * Math.PI) });
-  const stage = { offsetHeight: 900 };
+  const stage = { offsetHeight: stageHeight };
   const scene = { getBoundingClientRect: () => ({ top: sceneTop, height: 350 }) };
   const hero = {
-    offsetHeight: 1550,
+    get offsetHeight() { return stage.offsetHeight + 650; },
+    style: { setProperty(k, v) { this[k] = v; } }, classList: { add() {} },
     getBoundingClientRect: () => ({ top: heroTop }),
     querySelector: selector => selector === '.hero-stage' ? stage : scene
   };
   const reducedQuery = { matches: reduced, addEventListener: (_, callback) => { events.motion = callback; } };
   const pinnedQuery = { matches: pinned, addEventListener: (_, callback) => { events.layout = callback; } };
   const window = {
-    innerHeight: 900,
+    innerHeight: viewportHeight,
     matchMedia: query => query.includes('reduced-motion') ? reducedQuery : pinnedQuery,
     addEventListener: (event, callback) => { events[event] = callback; },
     requestAnimationFrame: callback => { frames.push(callback); return frames.length; }
@@ -38,8 +40,9 @@ function fixture({ reduced = false, pinned = true } = {}) {
   vm.runInNewContext(source, { document: { querySelector: () => hero, getElementById: id => nodes[id] }, window });
   const flush = () => { while (frames.length) frames.shift()(); };
   return {
-    nodes, frames, events, reducedQuery,
-    scroll(progress) { heroTop = -650 * progress; events.scroll(); flush(); },
+    nodes, frames, events, reducedQuery, hero, stage, window,
+    scroll(progress) { heroTop = Math.min(0, window.innerHeight - stage.offsetHeight) - 650 * progress; events.scroll(); flush(); },
+    setTop(top) { heroTop = top; events.scroll(); flush(); },
     mobileScroll(top) { sceneTop = top; events.scroll(); flush(); },
     flush,
     snapshot() { return JSON.stringify(Object.fromEntries(ids.map(id => [id, nodes[id].attrs]))); }
@@ -113,5 +116,32 @@ test('reduced-motion preference keeps a static scene and responds to preference 
 });
 
 test('script is safe on pages without the hero', () => {
-  assert.doesNotThrow(() => vm.runInNewContext(source, { document: { querySelector: () => null } }));
+  assert.doesNotThrow(() => vm.runInNewContext(source, { window: {}, document: { querySelector: () => null } }));
+});
+
+test('short laptop windows keep the full animation interval after tall content enters view', () => {
+  const reference = fixture();
+  for (const viewportHeight of [600, 720, 768, 800, 900]) {
+    const f = fixture({ viewportHeight, stageHeight: 950 });
+    assert.equal(f.hero.style['--stage-height'], '950px');
+    assert.equal(f.hero.style['--sticky-top'], `${viewportHeight - 950}px`);
+    f.scroll(0); const start = f.snapshot();
+    f.setTop((viewportHeight - 950) / 2);
+    assert.equal(f.snapshot(), start, 'animation should wait until the stage pins');
+    for (const p of [0, .25, .5, 1, .5, 0]) {
+      reference.scroll(p); f.scroll(p);
+      assert.equal(f.snapshot(), reference.snapshot());
+    }
+  }
+});
+
+test('resizing or zoom reflow refreshes the measured stage and sticky inset', () => {
+  const f = fixture();
+  f.window.innerHeight = 650; f.stage.offsetHeight = 820;
+  f.events.resize(); f.flush();
+  assert.equal(f.hero.style['--stage-height'], '820px');
+  assert.equal(f.hero.style['--sticky-top'], '-170px');
+  f.scroll(.5);
+  const reference = fixture(); reference.scroll(.5);
+  assert.equal(f.snapshot(), reference.snapshot());
 });

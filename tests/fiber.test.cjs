@@ -3,9 +3,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
-const source = fs.readFileSync(path.join(__dirname, '../js/fiber.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../js/scroll-scene.js'), 'utf8') + '\n' +
+  fs.readFileSync(path.join(__dirname, '../js/fiber.js'), 'utf8');
 
-function fixture({ reduced = false, pinned = true } = {}) {
+function fixture({ reduced = false, pinned = true, viewportHeight = 900, stageHeight = 900 } = {}) {
   const events = {}, frames = [];
   let top = 0;
   const node = () => ({ attrs: {}, style: {}, setAttribute(k, v) { this.attrs[k] = v; } });
@@ -13,23 +14,25 @@ function fixture({ reduced = false, pinned = true } = {}) {
   nodes['fiber-world'] = { ...node(), getBoundingClientRect: () => ({ top, height: 560 }) };
   const rollers = [1, -1].map(direction => ({ ...node(), dataset: { fiberRoller: String(direction) } }));
   const bar = node();
+  const stage = { offsetHeight: stageHeight };
   const section = {
-    offsetHeight: 1500, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
-    querySelector: s => s === '.photonics-stage' ? { offsetHeight: 900 } : bar,
+    get offsetHeight() { return stage.offsetHeight + 600; },
+    style: { setProperty(k, v) { this[k] = v; } }, classList: { add() {} }, getBoundingClientRect: () => ({ top }),
+    querySelector: s => s === '.photonics-stage' ? stage : bar,
     querySelectorAll: () => rollers
   };
   const motion = { matches: reduced, addEventListener: (_, f) => { events.motion = f; } };
   const layout = { matches: pinned, addEventListener: (_, f) => { events.layout = f; } };
   vm.runInNewContext(source, {
     document: { querySelector: () => section, getElementById: id => nodes[id] },
-    window: { innerHeight: 900, matchMedia: q => q.includes('reduced-motion') ? motion : layout,
+    window: { innerHeight: viewportHeight, matchMedia: q => q.includes('reduced-motion') ? motion : layout,
       addEventListener: (e, f) => { events[e] = f; },
       requestAnimationFrame: f => { frames.push(f); return frames.length; }
     }
   });
   const flush = () => { while (frames.length) frames.shift()(); };
-  return { nodes, rollers, motion, events, frames, flush,
-    scroll(p) { top = pinned ? -600 * p : 900 * .85 - p * (560 + 900 * .55); events.scroll(); flush(); },
+  return { nodes, rollers, motion, events, frames, flush, section, stage,
+    scroll(p) { top = pinned ? Math.min(0, viewportHeight - stage.offsetHeight) - 600 * p : 900 * .85 - p * (560 + 900 * .55); events.scroll(); flush(); },
     snapshot: () => JSON.stringify([nodes, rollers, bar])
   };
 }
@@ -72,5 +75,15 @@ test('reduced motion remains still, reacts to preference changes, and batches ev
 });
 
 test('safe when the LEOSS section is absent', () => {
-  assert.doesNotThrow(() => vm.runInNewContext(source, { document: { querySelector: () => null } }));
+  assert.doesNotThrow(() => vm.runInNewContext(source, { window: {}, document: { querySelector: () => null } }));
+});
+
+test('fiber animation uses the full pinned distance in a short laptop window', () => {
+  const reference = fixture();
+  const f = fixture({ viewportHeight: 650, stageHeight: 810 });
+  assert.equal(f.section.style['--sticky-top'], '-160px');
+  for (const p of [0, .2, .5, 1, .5, 0]) {
+    reference.scroll(p); f.scroll(p);
+    assert.equal(f.snapshot(), reference.snapshot());
+  }
 });

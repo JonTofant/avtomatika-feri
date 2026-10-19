@@ -7,7 +7,7 @@
   const world = document.getElementById('robotics-world');
   const actors = ['robot-wheeled', 'robot-biped', 'robot-quadruped'].map(id => document.getElementById(id));
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pinned = window.matchMedia('(min-width: 1000px) and (min-height: 900px)');
+  const pinned = window.matchMedia('(min-width: 900px)');
   const compact = window.matchMedia('(max-width: 700px)');
   const progressBar = section.querySelector('.robotics-progress span');
   const wheels = [...section.querySelectorAll('.robot-wheel')];
@@ -55,13 +55,14 @@
 
   function render() {
     frame = 0;
+    const stickyTop = window.ScrollScene.measure(section, stage);
     const width = compact.matches ? 600 : 1200;
     const scale = compact.matches ? .82 : 1;
     world.setAttribute('viewBox', `0 0 ${width} 370`);
     const rect = section.getBoundingClientRect();
     const sceneRect = world.getBoundingClientRect();
     const progress = reduced.matches ? 0 : pinned.matches
-      ? clamp(-rect.top / Math.max(1, section.offsetHeight - stage.offsetHeight))
+      ? clamp((stickyTop - rect.top) / Math.max(1, section.offsetHeight - stage.offsetHeight))
       : clamp((window.innerHeight * .85 - sceneRect.top) / (window.innerHeight * .55 + sceneRect.height));
     // A slower, bounded journey keeps every robot visible for the entire scene.
     const travelRange = compact.matches ? 80 : 200;
@@ -85,9 +86,10 @@
   }
   function schedule() { if (!frame) frame = window.requestAnimationFrame(render); }
   section.classList.add('is-ready');
+  window.ScrollScene.observe(stage, schedule);
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule);
   window.addEventListener('pageshow', schedule);
-  [reduced, pinned, compact].forEach(query => query.addEventListener('change', schedule));
+  [reduced, pinned, compact].forEach(query => window.ScrollScene.listen(query, schedule));
   render();
 })();
