@@ -7,7 +7,7 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 
 - `index.html` – vsebina, struktura in SVG-prizori drona, satelita, robotov in vlečnega stolpa.
 - `css/styles.css` – tema, postavitev in odzivni slogi, razdeljeni po sklopih.
-- `js/main.js` – interaktivna zanka ter predmetniki UN, VS in MAG.
+- `js/main.js` – predmetnika UN in VS smeri Avtomatika in robotika.
 - `js/scroll-scene.js` – skupno merjenje višine pripetih prizorov in združljivost dogodkov.
 - `js/hero.js` – premikanje drona in satelita glede na položaj strani.
 - `js/fiber.js` – vlečenje optičnega vlakna, valji in navijalni kolut LEOSS.
@@ -104,7 +104,7 @@ Slike so lokalne, prikazane v celoti (`object-fit: contain`) in imajo navedene v
 ### Dodatna vsebina
 
 Vsebina, dodana po zgledu au.jovo.cc, je preverjena na au.feri.um.si in v DKUM:
-magistrski predmetnik, dejstva o laboratorijih, dodatna zaključna dela,
+dejstva o laboratorijih, dodatna zaključna dela,
 razdelek `#kariera` (področja zaposlitve in lik diplomanta) ter projekt georadarja.
 Viri dodatnih del so v `STUDENT_PROJECT_SOURCES.md`.
 

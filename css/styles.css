@@ -112,7 +112,7 @@ h1 { font-size: clamp(48px, 6.2vw, 88px); letter-spacing: -.055em; line-height: 
 .section-inner, .section-inner-wide, .section-inner-spacious { max-width: var(--page-width); margin-inline: auto; display: grid; gap: 40px; }
 .section-heading-row, .study-heading { display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: flex-end; justify-content: space-between; }
 .section-heading-copy, .study-copy { flex: 1 1 440px; max-width: 660px; }
-.section-heading, .loop-heading, .enrollment-heading { max-width: 700px; }
+.section-heading, .enrollment-heading { max-width: 700px; }
 .section-title { font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -.04em; }
 .lead, .lead-light { margin-top: 20px; color: var(--muted); max-width: 650px; }
 .section-intro { flex: 1 1 330px; max-width: 480px; color: var(--muted); }
@@ -122,36 +122,69 @@ h1 { font-size: clamp(48px, 6.2vw, 88px); letter-spacing: -.055em; line-height: 
 .applications p { color: var(--muted); font-size: 14px; }
 .section-dark { background: var(--tint); }
 .section-study { background: var(--white); }
-.mono-label, .detail-eyebrow, .loop-label, .lab-code { font: 11px/1.6 var(--mono); letter-spacing: .05em; color: var(--accent); }
+.mono-label, .loop-label, .lab-code { font: 11px/1.6 var(--mono); letter-spacing: .05em; color: var(--accent); }
 
-/* 5. Interactive system diagram */
-.loop-diagram { display: grid; gap: 16px; }
-.loop-nodes { display: flex; flex-wrap: wrap; gap: 8px; }
-.loop-node { flex: 1 1 155px; display: grid; align-content: start; gap: 12px; padding: 18px; min-height: 100px; text-align: left; border: 1px solid #c2d1db; border-radius: 2px; color: var(--ink); background: transparent; }
-.loop-node:hover { border-color: var(--ink); }
-.loop-node[aria-pressed="true"] { background: var(--dark); color: white; border-color: var(--dark); }
-.loop-node-number { font: 11px var(--mono); opacity: .7; }
-.loop-node-label { font-size: 16px; line-height: 1.3; }
+/* 5. Shared panel row */
 .loop-panels { display: flex; flex-wrap: wrap; gap: 32px; }
-.loop-detail { flex: 2 1 460px; min-width: 0; display: grid; gap: 16px; }
-.detail-title { font-size: 30px; letter-spacing: -.035em; }
-.detail-text, .project-text { color: var(--muted); }
-.detail-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 10px; }
-.detail-example { display: grid; gap: 10px; border-top: 1px solid #c9d6df; padding-top: 18px; font-size: 14px; }
-.loop-subjects { flex: 1 1 260px; min-width: 0; padding: 0 0 0 28px; border-left: 1px solid #c9d6df; }
-.subject-list { display: grid; gap: 12px; margin-top: 20px; }
-.subject-list-item { display: flex; align-items: baseline; gap: 10px; font-size: 14px; }
-.subject-marker { width: 4px; height: 4px; background: var(--accent); flex: 0 0 auto; }
+.project-text { color: var(--muted); }
 
 /* 6. Curriculum */
-.study-tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
-.study-tab { background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent; padding: 13px 10px; font-size: 14px; min-height: 46px; }
-.study-tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.study-switch-wrap { display: grid; gap: 12px; }
+.study-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 6px; background: var(--tint); border-radius: 10px; }
+.study-tab { display: grid; gap: 4px; padding: 18px 22px; text-align: left; background: transparent; color: var(--ink); border: 1px solid transparent; border-radius: 6px; }
+.study-tab:hover { background: var(--white); border-color: var(--line); }
+.study-tab-title { font-size: clamp(18px, 1.8vw, 22px); font-weight: 650; letter-spacing: -.02em; line-height: 1.2; }
+.study-tab-text { font-size: 13px; color: var(--muted); }
+.study-tab[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: white; box-shadow: 0 6px 18px rgba(0, 99, 133, .22); }
+.study-tab[aria-pressed="true"] .study-tab-text { color: #d6ebf3; }
 .curriculum-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
 .curriculum-card { padding-top: 18px; border-top: 1px solid var(--line); }
 .curriculum-title { font: 11px/1.5 var(--mono); color: var(--accent); margin-bottom: 18px; }
 .curriculum-subjects { display: grid; gap: 10px; }
 .curriculum-subject { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.study-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.study-fact { display: grid; gap: 6px; padding-top: 18px; border-top: 3px solid var(--accent); }
+.study-fact-value { font-size: clamp(26px, 2.6vw, 36px); font-weight: 650; letter-spacing: -.04em; line-height: 1.1; color: var(--accent); }
+.study-fact-text { font-size: 14px; color: var(--muted); }
+.study-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; font-size: 13px; color: var(--muted); }
+.study-legend-sample { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 600; }
+.study-legend-sample.is-plain { color: var(--muted); font-weight: 400; }
+.study-legend-swatch { width: 22px; height: 14px; border-radius: 3px; background: #e2eef4; border-left: 3px solid var(--accent); }
+.is-plain .study-legend-swatch { background: transparent; border: 1px solid var(--line); }
+.study-legend-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.study-plan { display: grid; gap: 40px; }
+.study-first { display: grid; grid-template-columns: minmax(220px, 1fr) 2.4fr; gap: 16px 40px; padding-top: 18px; border-top: 1px solid var(--ink); }
+.study-first-copy { display: grid; align-content: start; gap: 10px; }
+.study-first .curriculum-title { margin-bottom: 0; font-weight: 700; }
+.study-chips { display: flex; flex-wrap: wrap; align-content: start; gap: 8px; }
+.study-chip { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--muted); }
+.study-years { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.study-year { min-width: 0; display: flex; flex-direction: column; gap: 14px; padding-top: 18px; border-top: 1px solid var(--ink); }
+.study-year .curriculum-title { margin-bottom: 0; font-weight: 700; }
+.study-year-title { font-size: 26px; letter-spacing: -.03em; }
+.study-year-text { font-size: 14px; color: var(--muted); }
+.study-semester { max-width: none; margin-top: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font: 700 11px/1.5 var(--mono); letter-spacing: .06em; color: var(--ink); }
+.study-subjects { display: grid; gap: 8px; }
+.study-subject { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; padding: 8px 12px; font-size: 14px; color: var(--muted); }
+.study-subject .study-subject-meta { flex-basis: auto; }
+.study-subject.is-ar { padding: 14px 16px; background: #e2eef4; border-left: 4px solid var(--tag); border-radius: 6px; font-size: 16px; color: var(--ink); }
+.study-subject.is-ar .study-subject-name { font-weight: 700; }
+.study-subject.is-ar .study-subject-meta { flex-basis: 100%; }
+.study-subject.is-elective { background: var(--white); border: 1px dashed #9fb6c4; border-left: 4px solid var(--tag); }
+.study-subject-meta { font: 10px/1.5 var(--mono); letter-spacing: .05em; color: var(--muted); }
+.study-subject.is-elective .study-subject-meta { color: var(--accent); font-weight: 700; }
+.study-subject-text { flex-basis: 100%; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.study-electives { display: grid; gap: 12px; margin-top: 8px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; }
+.study-electives .study-semester { margin-top: 0; }
+.study-more { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.study-more .mono-label { margin-right: 6px; }
+.block-tag { --tag: var(--accent); flex: 0 0 auto; padding: 2px 7px; border: 1px solid currentColor; border-radius: 3px; color: var(--tag); font: 700 10px/1.5 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.block-senzorji { --tag: var(--amber); }
+.block-vodenje { --tag: var(--um-blue); }
+.block-aktuatorji { --tag: var(--violet); }
+.block-energija { --tag: #087f73; }
+.block-itk { --tag: #305fc8; }
+.block-robotika { --tag: #b0412e; }
 .study-banner { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--ink); }
 .study-banner-title { font-size: 17px; }
 .study-banner-text, .study-note { font-size: 13px; color: var(--muted); }
@@ -197,6 +230,8 @@ h1 { font-size: clamp(48px, 6.2vw, 88px); letter-spacing: -.055em; line-height: 
   .labs-grid { gap: 24px; }
   .lab-title { font-size: 21px; }
   .enrollment-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .study-years { grid-template-columns: 1fr; gap: 48px; max-width: 720px; }
+  .study-first { grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
   .site-nav { align-items: flex-start; flex-direction: column; gap: 14px; padding-block: 16px; }
@@ -215,9 +250,14 @@ h1 { font-size: clamp(48px, 6.2vw, 88px); letter-spacing: -.055em; line-height: 
   .section, .section-study, .section-dark, .section-enrollment { padding-block: 56px; }
   .applications, .labs-grid, .projects-grid { grid-template-columns: 1fr; }
   .curriculum-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .study-facts { grid-template-columns: 1fr; gap: 16px; }
+  .study-fact { grid-template-columns: 132px 1fr; align-items: baseline; gap: 14px; padding-top: 14px; }
+  .study-fact-value { font-size: 24px; white-space: nowrap; }
+  .study-tab { padding: 14px 14px; }
+  .study-tab-title { font-size: 16px; }
+  .study-tab-text { font-size: 12px; }
+  .study-electives { padding: 14px; }
   .section-inner, .section-inner-wide, .section-inner-spacious { gap: 30px; }
-  .loop-node { flex-basis: 130px; }
-  .loop-subjects { padding: 24px 0 0; border-left: 0; border-top: 1px solid #c9d6df; }
   .featured-project { grid-template-columns: 110px 1fr; gap: 18px; }
   .featured-project-image { width: 110px; height: 150px; }
   .project-image { height: auto; max-height: 300px; }
@@ -225,7 +265,7 @@ h1 { font-size: clamp(48px, 6.2vw, 88px); letter-spacing: -.055em; line-height: 
 }
 @media (max-width: 380px) {
   .nav-links { gap: 16px; }
-  .scene figcaption, .detail-examples, .curriculum-grid, .enrollment-steps { grid-template-columns: 1fr; }
+  .scene figcaption, .curriculum-grid, .enrollment-steps { grid-template-columns: 1fr; }
   .scene-status { display: none; }
   .hero-bottom > span:last-child { display: none; }
 }
@@ -245,11 +285,8 @@ p { max-width: 65ch; }
 .scene figcaption p { font-size: 15px; max-width: 60ch; }
 .scene h2 { font-size: clamp(21px, 2vw, 27px); }
 .section-title { max-width: 20ch; line-height: 1.1; }
-.section-heading, .loop-heading { max-width: 760px; }
+.section-heading { max-width: 760px; }
 .lead, .lead-light { margin-top: 16px; max-width: 52ch; }
-.detail-text { max-width: 46ch; font-size: 18px; line-height: 1.6; }
-.detail-title { font-weight: 700; }
-.loop-node-label { font-weight: 600; }
 .project-text, .project-description, .lab-description { font-size: 15px; line-height: 1.65; }
 .project-text strong, .project-description strong, .lab-description strong { display: block; margin-bottom: 5px; }
 .lab-card { gap: 16px; }
@@ -395,7 +432,6 @@ p { max-width: 65ch; }
 .applications > div:nth-child(1) { border-color: var(--accent); }
 .applications > div:nth-child(2) { border-color: var(--um-blue); }
 .applications > div:nth-child(3) { border-color: var(--blue); }
-.loop-node[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
 #projekti { background: #f5f8fa; }
 .featured-project, .project-list-item { border-color: var(--line); }
 .featured-project-image, .project-image { border-radius: 6px; }
