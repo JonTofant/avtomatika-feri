@@ -101,6 +101,13 @@ Tofanta (2025), Paneta Andova (2025) in Uroša Kukoviča (2026), s povezavami v 
 Viri, uradni naslovi in izvor slik so v `STUDENT_PROJECT_SOURCES.md`.
 Slike so lokalne, prikazane v celoti (`object-fit: contain`) in imajo navedene vire.
 
+### Dodatna vsebina
+
+Vsebina, dodana po zgledu au.jovo.cc, je preverjena na au.feri.um.si in v DKUM:
+dejstva o laboratorijih, dodatna zaključna dela,
+razdelek `#kariera` (področja zaposlitve in lik diplomanta) ter projekt georadarja.
+Viri dodatnih del so v `STUDENT_PROJECT_SOURCES.md`.
+
 ## Preverjanje
 
 Z nameščenim Node.js:

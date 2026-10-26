@@ -46,6 +46,30 @@ Andrej Sarjaš; pri delu Paneta Andova je komentor Dušan Gleich.
 - Datoteka je kopirana nespremenjena. Na strani je naveden vir LOSDV, UM FERI;
   avtor fotografije in posebna licenca na izvorni strani nista navedena.
 
+## Še več zaključnih del (brez slik)
+
+Preverjeno 26. 10. 2026 v DKUM. Na strani so le naslov, kratek opis, avtor, vrsta,
+leto izida in povezava; slik ni.
+
+- Adrijana Savevska · 2025 · mentor Simon Pevec, komentor Denis Đonlagić ·
+  *Optičnovlakenski taktilni senzor s primerom uporabe v pobiranju majhnih sadežev* ·
+  [DKUM 96389](https://dk.um.si/IzpisGradiva.php?id=96389&lang=slv)
+- Uroš Stiplovšek · 2024 · mentor Andrej Sarjaš ·
+  *Vodenje krožnega inverznega nihala z oddaljenim merilnim mestom* ·
+  [DKUM 87880](https://dk.um.si/IzpisGradiva.php?id=87880&lang=slv)
+- Matevž Rakun · 2025 · mentor Marjan Golob ·
+  *Optimizacija sprotnega nastavljanja parametrov regulatorja z uporabo hibridnih mehkih sistemov* ·
+  [DKUM 91749](https://dk.um.si/IzpisGradiva.php?id=91749&lang=slv)
+- Tadej Habjanič · 2023 · mentor Dušan Gleich ·
+  *Odstranjevanje pegastega šuma iz slik SAR z uporabo globokega učenja* ·
+  [DKUM 86581](https://dk.um.si/IzpisGradiva.php?id=86581&lang=slv)
+- Žiga Videmšek · 2021 (diplomsko delo) · mentor Nenad Muškinja, komentor Andrej Rotovnik ·
+  *Uporaba temperaturnega regulatorja z vgrajeno umetno inteligenco v industrijskih aplikacijah* ·
+  [DKUM 78700](https://dk.um.si/IzpisGradiva.php?id=78700&lang=slv)
+
+Projekt georadarja na dronu: Smogavec in sod., »Comparative Study of GPR Acquisition
+Methods for Shallow Buried Object Detection«, *Remote Sensing* 16(21), 3931, 2024.
+
 ## Skupni pregled
 
 [Študentski projekti in zaključne naloge, LOSDV](https://au.feri.um.si/losdv/studentski-projekti-in-zakljucne-naloge/)

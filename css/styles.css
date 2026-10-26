@@ -547,3 +547,42 @@ p { max-width: 65ch; }
   #fiber-world { max-height: 62vh; }
   .photonics h2 { font-size: clamp(44px, 4.5vw, 60px); }
 }
+
+/* 14. Lab facts, more theses and careers. Content follows au.feri.um.si and DKUM. */
+.lab-facts { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.lab-facts li { font-size: 13px; line-height: 1.5; color: var(--muted); }
+.lab-facts span { display: block; font: 10px/1.5 var(--mono); letter-spacing: .05em; color: var(--accent); }
+
+.more-theses { display: grid; gap: 20px; }
+.more-theses-title { font-size: 22px; letter-spacing: -.02em; }
+.more-theses-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+.more-thesis { display: flex; flex-direction: column; gap: 10px; padding: 18px; background: white; border: 1px solid var(--line); border-radius: 0 0 8px 8px; border-top: 2px solid var(--accent); }
+.more-thesis h4 { margin: 0; font-size: 17px; line-height: 1.25; }
+.more-thesis-text { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.more-thesis-meta { margin-top: auto; font-size: 12px; font-weight: 700; }
+.more-thesis-link { font-size: 12px; font-weight: 600; text-decoration: none; align-self: flex-start; }
+.more-thesis-link:hover { text-decoration: underline; }
+
+.career-tracks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.career-tracks > div { display: grid; align-content: start; gap: 10px; border-top: 1px solid var(--ink); padding-top: 20px; }
+.career-tracks h3 { font-size: 20px; }
+.career-tracks p { font-size: 14px; color: var(--muted); }
+.graduate-profile { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.graduate-profile article { display: grid; align-content: start; gap: 14px; padding: 26px; background: var(--tint); border-radius: 8px; }
+.graduate-profile h3 { font-size: 23px; letter-spacing: -.03em; }
+.graduate-profile p:not(.mono-label) { font-size: 15px; color: var(--muted); }
+.graduate-profile strong { display: block; margin-top: 4px; }
+.profile-list { display: grid; gap: 8px; }
+.profile-list li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; }
+.profile-list li::before { content: ''; flex: 0 0 4px; height: 4px; background: var(--accent); transform: translateY(-2px); }
+
+@media (max-width: 999px) {
+  .career-tracks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .graduate-profile { grid-template-columns: 1fr; }
+  .graduate-profile article { padding: 20px; }
+}
+@media (max-width: 380px) {
+  .career-tracks { grid-template-columns: 1fr; }
+}
