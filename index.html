@@ -11,7 +11,6 @@
 <script src="js/hero.js" defer></script>
 <script src="js/robotics.js" defer></script>
 <script src="js/fiber.js" defer></script>
-<script src="js/loop-sim.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Preskoči na vsebino</a>
@@ -382,38 +381,6 @@
 <p class="loop-label">TO SE NAUČIŠ PRI PREDMETIH</p>
 <ul id="selsubj" class="subject-list"></ul>
 </div>
-</div>
-
-<!-- Live feedback loop: a simple room heating model with a PI controller. -->
-<div class="loop-sim" id="loop-sim">
-<div class="loop-sim-copy">
-<p class="loop-label">PREIZKUSI ZANKO · GRETJE SOBE</p>
-<h3 class="loop-sim-title">Kaj se zgodi, ko odpreš okno?</h3>
-<p class="detail-text">Regulator meri temperaturo in prilagaja moč grelnika. <strong>Izklopi povratno zvezo</strong> in poglej, kako se soba ohladi.</p>
-<div class="loop-sim-controls">
-<button type="button" class="loop-sim-button" data-sim="setpoint">Spremeni želeno temperaturo</button>
-<button type="button" class="loop-sim-button" data-sim="window" aria-pressed="false">Odpri okno</button>
-<button type="button" class="loop-sim-button" data-sim="feedback" aria-pressed="true">Povratna zveza: vklopljena</button>
-</div>
-<dl class="loop-sim-readout" aria-live="polite">
-<div><dt>ŽELENO</dt><dd data-sim-out="setpoint">21,0 °C</dd></div>
-<div><dt>IZMERJENO</dt><dd data-sim-out="temp">21,0 °C</dd></div>
-<div><dt>GRELNIK</dt><dd data-sim-out="power">40 %</dd></div>
-</dl>
-</div>
-<figure class="loop-sim-figure">
-<svg id="loop-sim-plot" viewBox="0 0 560 260" role="img" aria-labelledby="loop-sim-plot-title loop-sim-plot-desc">
-<title id="loop-sim-plot-title">Temperatura v sobi skozi čas</title>
-<desc id="loop-sim-plot-desc">Črtkana črta je želena temperatura, polna črta izmerjena temperatura. Poenostavljen model sobe z regulatorjem PI.</desc>
-<g class="loop-sim-grid"><path d="M40 30H540M40 80H540M40 130H540M40 180H540M40 230H540"/></g>
-<g class="loop-sim-axis"><text x="32" y="34">26°</text><text x="32" y="84">23°</text><text x="32" y="134">20°</text><text x="32" y="184">17°</text><text x="32" y="234">14°</text></g>
-<path id="loop-sim-window" d="" class="loop-sim-disturbance"/>
-<path id="loop-sim-setpoint" d="" class="loop-sim-setpoint-line"/>
-<path id="loop-sim-temp" d="" class="loop-sim-temp-line"/>
-<text x="40" y="254" class="svg-label subtle">ZADNJIH 60 MINUT</text>
-</svg>
-<figcaption>Poenostavljen model, ne meritev. Rumeno ozadje označuje odprto okno.</figcaption>
-</figure>
 </div>
 </div>
 </section>

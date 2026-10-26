@@ -8,7 +8,6 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 - `index.html` – vsebina, struktura in SVG-prizori drona, satelita, robotov in vlečnega stolpa.
 - `css/styles.css` – tema, postavitev in odzivni slogi, razdeljeni po sklopih.
 - `js/main.js` – interaktivna zanka ter predmetniki UN, VS in MAG.
-- `js/loop-sim.js` – simulacija zanke: gretje sobe z regulatorjem PI, motnjo in izklopom povratne zveze.
 - `js/scroll-scene.js` – skupno merjenje višine pripetih prizorov in združljivost dogodkov.
 - `js/hero.js` – premikanje drona in satelita glede na položaj strani.
 - `js/fiber.js` – vlečenje optičnega vlakna, valji in navijalni kolut LEOSS.
@@ -102,13 +101,7 @@ Tofanta (2025), Paneta Andova (2025) in Uroša Kukoviča (2026), s povezavami v 
 Viri, uradni naslovi in izvor slik so v `STUDENT_PROJECT_SOURCES.md`.
 Slike so lokalne, prikazane v celoti (`object-fit: contain`) in imajo navedene vire.
 
-### Simulacija zanke in dodatna vsebina
-
-Pod gradniki zanke je model sobe z grelnikom (`js/loop-sim.js`). Regulator PI
-vodi temperaturo; »Odpri okno« poveča toplotne izgube, brez povratne zveze pa
-grelnik deluje z močjo, izračunano za zaprto okno. Simulacija teče le, ko je
-razdelek viden. Pri `prefers-reduced-motion` se odziv izračuna takoj, brez animacije.
-Konstante modela in meje grafa so na začetku datoteke.
+### Dodatna vsebina
 
 Vsebina, dodana po zgledu au.jovo.cc, je preverjena na au.feri.um.si in v DKUM:
 magistrski predmetnik, dejstva o laboratorijih, dodatna zaključna dela,
@@ -125,7 +118,6 @@ node --check js/scroll-scene.js
 node --check js/hero.js
 node --check js/robotics.js
 node --check js/fiber.js
-node --check js/loop-sim.js
 node --test tests/*.test.cjs
 ```
 
