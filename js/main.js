@@ -49,6 +49,15 @@ var vs = [
       { name: 'ITK', subjects: ['Komunikacije v avtomatiki'] },
       { name: 'PODPORNA ZNANJA', subjects: ['Digitalna tehnika', 'Informacijska tehnika in dokumentiranje', 'Analiza II', 'Izbirni predmeti I, II, III'] }
     ];
+var mag = [
+      { name: 'SENZORJI', subjects: ['Senzorski sistemi', 'Optoelektronika', 'Strojni vid'] },
+      { name: 'SISTEM ZA VODENJE', subjects: ['Snovanje sistemov vodenja', 'Napredni regulacijski sistemi', 'Inteligentno vodenje proizvodnih postopkov', 'Robotski sistemi', 'Vgrajeni sistemi'] },
+      { name: 'AKTUATORJI', subjects: ['Pretvarjanje energije', 'Elektronski elementi'] },
+      { name: 'VIR ENERGIJE', subjects: ['Energetska elektronika', 'Optimizacija v elektroenergetiki'] },
+      { name: 'ITK', subjects: ['Sistemi daljinskega vodenja', 'Internet stvari in umetna inteligenca za vgrajene sisteme', 'Mobilni in vseprisotni elektronski sistemi'] },
+      { name: 'PODPORNA ZNANJA', subjects: ['Teorija elektromagnetnega polja', 'Elektrodinamika', 'Elektronski sistemi za vesoljske aplikacije', 'Kakovost, zanesljivost in preizkušanje'] }
+    ];
+var programmes = { un: un, vs: vs, mag: mag };
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 function render(){
   var h='';
@@ -64,11 +73,11 @@ function render(){
   document.getElementById('selsubj').innerHTML=sel.subjects.map(function(s){
     return '<li class="subject-list-item"><span aria-hidden="true" class="subject-marker"></span><span>'+esc(s)+'</span></li>';
   }).join('');
-  document.getElementById('tabs').innerHTML=[['un','Univerzitetni'],['vs','Visokošolski strokovni']].map(function(t){
+  document.getElementById('tabs').innerHTML=[['un','Univerzitetni'],['vs','Visokošolski strokovni'],['mag','Magistrski']].map(function(t){
     var on=t[0]===state.tab;
     return '<button type="button" data-tab="'+t[0]+'" aria-pressed="'+on+'" class="study-tab">'+t[1]+'</button>';
   }).join('');
-  document.getElementById('curr').innerHTML=(state.tab==='vs'?vs:un).map(function(c){
+  document.getElementById('curr').innerHTML=(programmes[state.tab]||un).map(function(c){
     return '<div class="curriculum-card"><p class="curriculum-title">'+c.name+'</p><ul class="curriculum-subjects">'
       +c.subjects.map(function(s){return '<li class="curriculum-subject">'+esc(s)+'</li>';}).join('')+'</ul></div>';
   }).join('');

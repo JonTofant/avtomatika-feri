@@ -11,6 +11,7 @@
 <script src="js/hero.js" defer></script>
 <script src="js/robotics.js" defer></script>
 <script src="js/fiber.js" defer></script>
+<script src="js/loop-sim.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Preskoči na vsebino</a>
@@ -28,6 +29,7 @@
 <a href="#projekti" class="nav-link">Raziskovalni projekti</a>
 <a href="#studentski-projekti" class="nav-link">Študentski projekti</a>
 <a href="#laboratoriji" class="nav-link">Laboratoriji</a>
+<a href="#kariera" class="nav-link">Kariera</a>
 <a href="#vpis" class="nav-cta">Vpis ↗</a>
 </div>
 </nav>
@@ -381,6 +383,38 @@
 <ul id="selsubj" class="subject-list"></ul>
 </div>
 </div>
+
+<!-- Live feedback loop: a simple room heating model with a PI controller. -->
+<div class="loop-sim" id="loop-sim">
+<div class="loop-sim-copy">
+<p class="loop-label">PREIZKUSI ZANKO · GRETJE SOBE</p>
+<h3 class="loop-sim-title">Kaj se zgodi, ko odpreš okno?</h3>
+<p class="detail-text">Regulator meri temperaturo in prilagaja moč grelnika. <strong>Izklopi povratno zvezo</strong> in poglej, kako se soba ohladi.</p>
+<div class="loop-sim-controls">
+<button type="button" class="loop-sim-button" data-sim="setpoint">Spremeni želeno temperaturo</button>
+<button type="button" class="loop-sim-button" data-sim="window" aria-pressed="false">Odpri okno</button>
+<button type="button" class="loop-sim-button" data-sim="feedback" aria-pressed="true">Povratna zveza: vklopljena</button>
+</div>
+<dl class="loop-sim-readout" aria-live="polite">
+<div><dt>ŽELENO</dt><dd data-sim-out="setpoint">21,0 °C</dd></div>
+<div><dt>IZMERJENO</dt><dd data-sim-out="temp">21,0 °C</dd></div>
+<div><dt>GRELNIK</dt><dd data-sim-out="power">40 %</dd></div>
+</dl>
+</div>
+<figure class="loop-sim-figure">
+<svg id="loop-sim-plot" viewBox="0 0 560 260" role="img" aria-labelledby="loop-sim-plot-title loop-sim-plot-desc">
+<title id="loop-sim-plot-title">Temperatura v sobi skozi čas</title>
+<desc id="loop-sim-plot-desc">Črtkana črta je želena temperatura, polna črta izmerjena temperatura. Poenostavljen model sobe z regulatorjem PI.</desc>
+<g class="loop-sim-grid"><path d="M40 30H540M40 80H540M40 130H540M40 180H540M40 230H540"/></g>
+<g class="loop-sim-axis"><text x="32" y="34">26°</text><text x="32" y="84">23°</text><text x="32" y="134">20°</text><text x="32" y="184">17°</text><text x="32" y="234">14°</text></g>
+<path id="loop-sim-window" d="" class="loop-sim-disturbance"/>
+<path id="loop-sim-setpoint" d="" class="loop-sim-setpoint-line"/>
+<path id="loop-sim-temp" d="" class="loop-sim-temp-line"/>
+<text x="40" y="254" class="svg-label subtle">ZADNJIH 60 MINUT</text>
+</svg>
+<figcaption>Poenostavljen model, ne meritev. Rumeno ozadje označuje odprto okno.</figcaption>
+</figure>
+</div>
 </div>
 </section>
 
@@ -391,7 +425,7 @@
 <div class="study-copy">
 <p class="eyebrow">ŠTUDIJ</p>
 <h2 class="section-title">Predmeti in področja.</h2>
-<p class="lead">Primerjaj univerzitetni in visokošolski strokovni program.</p>
+<p class="lead">Primerjaj univerzitetni in visokošolski strokovni program ter poglej, kam vodi magisterij.</p>
 </div>
 <div role="group" aria-label="Izberi vrsto študija" class="study-tabs">
 <div id="tabs" class="display-contents"></div>
@@ -409,7 +443,7 @@
 <span class="study-banner-title">Praktikum v avtomatiki in robotiki – projekt</span>
 <span class="study-banner-text"><strong>Znanje preizkusiš v praksi.</strong> V svojem projektu.</span>
 </div>
-<p class="study-note">Seznam predmetov je povzet po predstavitvenih gradivih Inštituta za avtomatiko. Aktualni predmetnik je objavljen na <a href="https://feri.um.si/">feri.um.si</a>.</p>
+<p class="study-note">Seznam predmetov je povzet po predstavitvenih gradivih Inštituta za avtomatiko. Magistrski predmeti so povzeti po razpisu izpitnih rokov 2024/25; nekateri so izbirni. Aktualni predmetnik je objavljen na <a href="https://feri.um.si/">feri.um.si</a>, za magisterij na strani <a href="https://feri.um.si/studij/programi/druga-stopnja/mag/e/">Elektrotehnika (MAG)</a>.</p>
 </div>
 </section>
 
@@ -456,7 +490,9 @@
 <li class="project-list-item">Zaznavanje sprememb z radarsko tehniko – HSE in Dravske elektrarne</li>
 <li class="project-list-item">Vodenje kotlov na lesno biomaso – Seltron</li>
 <li class="project-list-item">Vodenje temperature v metalurških pečeh – Bosio</li>
-<li>Merilni sistem za testiranje hladilnih aparatov – Gorenje</li>
+<li class="project-list-item">Merilni sistem za testiranje hladilnih aparatov – Gorenje</li>
+<li class="project-list-item">Georadar na dronu za iskanje zakopanih predmetov – NATO SPS · <a href="https://www.mdpi.com/2072-4292/16/21/3931">članek v Remote Sensing</a></li>
+<li>Ocena vlažnosti tal iz satelitskih slik SAR</li>
 </ul>
 </article>
 </div>
@@ -476,18 +512,33 @@
 <span class="lab-code">LEOSS</span>
 <h3 class="lab-title">Laboratorij za elektro-optične in senzorske sisteme</h3>
 <p class="lab-description"><strong>Svetloba kot merilno orodje.</strong> Fotonika, optična vlakna in razvoj senzorjev.</p>
+<ul class="lab-facts">
+<li><span>1995</span> Deluje od leta 1995, več kot 30 let izkušenj z vlakni in senzorji.</li>
+<li><span>ČISTA SOBA</span> Mikroobdelava, litografija in nanašanje tankih plasti.</li>
+<li><span>INDUSTRIJA</span> Približno polovica raziskovalnega proračuna v zadnjih 10 letih.</li>
+</ul>
 <a href="https://au.feri.um.si/leoss/" class="lab-link">Obišči laboratorij →</a>
 </article>
 <article class="lab-card">
 <span class="lab-code">LPA</span>
 <h3 class="lab-title">Laboratorij za procesno avtomatizacijo</h3>
 <p class="lab-description"><strong>Procesi pod nadzorom.</strong> Industrijski krmilniki, avtomatizacija in pametne zgradbe.</p>
+<ul class="lab-facts">
+<li><span>PLC · SCADA · MES</span> Od krmilnika do informacijskega sistema proizvodnje.</li>
+<li><span>MODELI</span> Destilacija, toplotni prenosnik, sklopljeni rezervoarji, inverzno nihalo.</li>
+<li><span>100+</span> Mentorstvo pri več kot 100 diplomskih nalogah.</li>
+</ul>
 <a href="https://au.feri.um.si/lpa/" class="lab-link">Obišči laboratorij →</a>
 </article>
 <article class="lab-card">
 <span class="lab-code">LOSDV</span>
 <h3 class="lab-title">Laboratorij za obdelavo signalov in daljinska vodenja</h3>
 <p class="lab-description"><strong>Iz signalov do informacije.</strong> Radarji, strojni vid in vodenje robotov.</p>
+<ul class="lab-facts">
+<li><span>RADAR</span> Radar FMCW, georadar na dronu in satelitske slike SAR.</li>
+<li><span>STROJNI VID</span> Od pregleda ulitkov do prepoznavanja dronov.</li>
+<li><span>ROBOTI</span> Dvokolesni robot, inverzno nihalo in raketa, ki pristane sama.</li>
+</ul>
 <a href="https://au.feri.um.si/losdv/" class="lab-link">Obišči laboratorij →</a>
 </article>
 </div>
@@ -552,7 +603,82 @@
         </div>
       </article>
     </div>
+
+    <div class="more-theses">
+      <h3 class="more-theses-title">Še več zaključnih del</h3>
+      <ul class="more-theses-list">
+        <li class="more-thesis">
+          <p class="student-project-topic">Senzorji · Fotonika · Kmetijstvo</p>
+          <h4>Senzor dotika za obiranje malin</h4>
+          <p class="more-thesis-text">Optičnovlakenski senzor v mehki membrani posnema človeško kožo. Prijemalo zato malino trdno prime, a je ne zmečka.</p>
+          <p class="more-thesis-meta">Adrijana Savevska · Magistrsko delo · 2025</p>
+          <a class="more-thesis-link" href="https://dk.um.si/IzpisGradiva.php?id=96389&amp;lang=slv">DKUM <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="more-thesis">
+          <p class="student-project-topic">Regulacije · Vgrajeni sistemi</p>
+          <h4>Krožno inverzno nihalo</h4>
+          <p class="more-thesis-text">Kot palice se brezžično prenaša do krmilnika. Med regulatorji PID, polinomsko sintezo in prostorom stanj je zmagal zadnji.</p>
+          <p class="more-thesis-meta">Uroš Stiplovšek · Magistrsko delo · 2024</p>
+          <a class="more-thesis-link" href="https://dk.um.si/IzpisGradiva.php?id=87880&amp;lang=slv">DKUM <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="more-thesis">
+          <p class="student-project-topic">Umetna inteligenca · Regulacije</p>
+          <h4>Regulator, ki se nastavlja sam</h4>
+          <p class="more-thesis-text">Roj delcev in mehko sklepanje sproti nastavljata parametre regulatorja PID, ko se proces spreminja.</p>
+          <p class="more-thesis-meta">Matevž Rakun · Magistrsko delo · 2025</p>
+          <a class="more-thesis-link" href="https://dk.um.si/IzpisGradiva.php?id=91749&amp;lang=slv">DKUM <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="more-thesis">
+          <p class="student-project-topic">Radar · Globoko učenje</p>
+          <h4>Čistejše slike SAR</h4>
+          <p class="more-thesis-text">Nevronska mreža odstrani pegasti šum s satelitskih radarskih slik in ohrani robove ter podrobnosti.</p>
+          <p class="more-thesis-meta">Tadej Habjanič · Magistrsko delo · 2023</p>
+          <a class="more-thesis-link" href="https://dk.um.si/IzpisGradiva.php?id=86581&amp;lang=slv">DKUM <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="more-thesis">
+          <p class="student-project-topic">Industrijska avtomatizacija</p>
+          <h4>Temperaturni regulator z umetno inteligenco</h4>
+          <p class="more-thesis-text">Industrijski regulator OMRON na laboratorijskem vetrovniku: dvopoložajna regulacija, PID in samodejno uglaševanje.</p>
+          <p class="more-thesis-meta">Žiga Videmšek · Diplomsko delo · 2021</p>
+          <a class="more-thesis-link" href="https://dk.um.si/IzpisGradiva.php?id=78700&amp;lang=slv">DKUM <span aria-hidden="true">↗</span></a>
+        </li>
+      </ul>
+    </div>
   </div>
+</section>
+
+<!-- ============ KARIERA ============ -->
+<section id="kariera" class="section" aria-labelledby="career-title">
+<div class="section-inner-spacious">
+<div class="section-heading-row">
+<div class="section-heading-copy">
+<p class="eyebrow">PO ŠTUDIJU</p>
+<h2 id="career-title" class="section-title">Avtomatizira se vse.</h2>
+</div>
+<p class="section-intro"><strong>Inženirji, ki to znajo, so iskani.</strong><br>V industriji, energetiki, prometu, raziskavah in izobraževanju. Ali v svojem podjetju.</p>
+</div>
+<div class="career-tracks">
+<div><span class="mono-label">01</span><h3>Digitalna tovarna</h3><p>Roboti, krmilniki PLC ter sistemi MES in ERP.</p></div>
+<div><span class="mono-label">02</span><h3>Energetika</h3><p>Elektrarne, omrežja in obnovljivi viri.</p></div>
+<div><span class="mono-label">03</span><h3>Pametne zgradbe</h3><p>Nadzor, ogrevanje in infrastruktura.</p></div>
+<div><span class="mono-label">04</span><h3>Razvoj in raziskave</h3><p>Senzorji, fotonika in vgrajeni sistemi.</p></div>
+</div>
+<div class="graduate-profile">
+<article>
+<p class="mono-label">1. STOPNJA · KAJ ZNAŠ</p>
+<h3>Računalniško vodenje industrijskih procesov</h3>
+<p>Načrtuješ vodenje in digitaliziraš procese, zgradbe in infrastrukturo. <strong>Projekt izpelješ od zamisli do zagona.</strong></p>
+<ul class="profile-list"><li>Senzorji in merjenje neelektričnih veličin</li><li>Aktuatorji, krmilniki PLC in procesni računalniki</li><li>Industrijske komunikacije in programska oprema</li><li>Modeliranje, identifikacija in preprostejši sistemi vodenja</li></ul>
+</article>
+<article>
+<p class="mono-label">2. STOPNJA · KAJ ZNAŠ</p>
+<h3>Procesna informatizacija</h3>
+<p>Povežeš procese in informacijske sisteme v digitalni tovarni, zgradbi ali energetskem sistemu. <strong>Delaš na višjih ravneh vodenja.</strong></p>
+<ul class="profile-list"><li>Sistemi SCADA, MES in ERP</li><li>Nadzor procesov in odkrivanje napak</li><li>Vgrajeni sistemi z brezžičnimi povezavami</li><li>Napredno modeliranje, simulacije in vodenje</li></ul>
+</article>
+</div>
+<p class="study-note">Povzeto po opisu študija na straneh Inštituta za avtomatiko.</p>
+</div>
 </section>
 
 <!-- ============ VPIS ============ -->
@@ -571,6 +697,7 @@
 </ol>
 <div class="enrollment-actions">
 <a href="https://feri.um.si/studij/programi/prva-stopnja/un/e/" class="button-white">Pogoji za vpis na FERI</a>
+<a href="https://pridi-na-feri.si/" class="button-outline-white">Pridi na FERI</a>
 <a href="https://au.feri.um.si/" class="button-outline-white">Inštitut za avtomatiko</a>
 </div>
 </div>
