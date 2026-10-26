@@ -7,7 +7,7 @@ HTML, CSS in JavaScript so ločeni; namestitev paketov ali gradnja nista potrebn
 
 - `index.html` – vsebina, struktura in SVG-prizori drona, satelita, robotov in vlečnega stolpa.
 - `css/styles.css` – tema, postavitev in odzivni slogi, razdeljeni po sklopih.
-- `js/main.js` – interaktivna zanka ter predmetnika UN in VS.
+- `js/main.js` – predmetnika UN in VS smeri Avtomatika in robotika.
 - `js/scroll-scene.js` – skupno merjenje višine pripetih prizorov in združljivost dogodkov.
 - `js/hero.js` – premikanje drona in satelita glede na položaj strani.
 - `js/fiber.js` – vlečenje optičnega vlakna, valji in navijalni kolut LEOSS.
